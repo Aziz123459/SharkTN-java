@@ -70,10 +70,10 @@ public class User implements UserDetails {
     private Date createdAt;
 	
     private Date updatedAt;
-    @OneToOne(mappedBy = "investor")
+    @OneToOne(mappedBy = "user")
     private Investor investor;
 
-    @OneToOne(mappedBy = "startup")
+    @OneToOne(mappedBy = "user")
     private Startup startup;
    
 	@PrePersist
@@ -109,12 +109,18 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+	@Override
+
     public boolean isAccountNonLocked() {
         return true;
     }
+	@Override
+
     public boolean isCredentialsNonExpired() {
         return true;
     }
+	@Override
+
     public boolean isEnabled() {
         return true;
     }

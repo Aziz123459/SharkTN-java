@@ -14,7 +14,8 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-
+import lombok.Data;
+@Data
 @Entity
 @Table(name="investor")
 public class Investor {
@@ -34,15 +35,13 @@ public class Investor {
 	
 	@NotEmpty(message="Investment Amount is required")
 	private String message;
-
-	private int userId;
 	
 	@NotEmpty(message="Investor email is required")
 	private String investorEmail;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "investor_id", referencedColumnName = "id")
-    private User creator;
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
     
 	@Column(updatable = false)
     private Date createdAt;
@@ -60,77 +59,6 @@ public class Investor {
         this.updatedAt = new Date();
     }
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getBusinessRegistrationNumber() {
-		return businessRegistrationNumber;
-	}
-
-	public void setBusinessRegistrationNumber(String businessRegistrationNumber) {
-		this.businessRegistrationNumber = businessRegistrationNumber;
-	}
-
-	public int getInvestmentAmount() {
-		return investmentAmount;
-	}
-
-	public void setInvestmentAmount(int investmentAmount) {
-		this.investmentAmount = investmentAmount;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getInvestorEmail() {
-		return investorEmail;
-	}
-
-	public void setInvestorEmail(String investorEmail) {
-		this.investorEmail = investorEmail;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public User getCreator() {
-		return creator;
-	}
-
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
 	
 	
 	

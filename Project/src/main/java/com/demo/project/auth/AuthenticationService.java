@@ -33,6 +33,7 @@ public class AuthenticationService {
 		repository.save(user);
 		var jwtToken= jwtService.generateToken(user);
 		return AuthenticationResponse.builder()
+				.role(user.getRole())
 				.token(jwtToken)
 				.build();
 	}

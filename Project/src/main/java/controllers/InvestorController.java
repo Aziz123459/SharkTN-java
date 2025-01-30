@@ -41,9 +41,9 @@ public class InvestorController {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             Long userId = jwtService.extractUserId(token);
-            if (userRepository.findById(userId).isPresent()) {
+            if (userRepository.findById(userId).isPresent()) { 
                 User user = userRepository.findById(userId).get();
-                investor.setCreator(user);
+                investor.setUser(user);
                 return investorService.createInvestor(investor);
             }
             throw new RuntimeException("User not found");

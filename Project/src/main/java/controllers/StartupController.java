@@ -43,7 +43,7 @@ public class StartupController {
             Long userId = jwtService.extractUserId(token);
             if (userRepository.findById(userId).isPresent()) {
                 User user = userRepository.findById(userId).get();
-                startup.setCreator(user);
+                startup.setUser(user);
                 return startupService.createStartup(startup);
             }
             throw new RuntimeException("User not found");

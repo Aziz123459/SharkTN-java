@@ -35,7 +35,7 @@ public class UserController {
 	     * @param role the role to filter users by
 	     * @return List of UserDTO containing details of users with the specified role
 	     */
-	    @GetMapping("/posts/user/role/{role}")
+	    @GetMapping("/user/role/{role}")
 	    public List<UserDTO> getUsersByRole(@PathVariable("role") Role role) {
 	        return userService.getUsersByRole(role);
 	    }
