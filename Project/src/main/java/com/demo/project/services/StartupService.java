@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import com.demo.project.DTOS.StartupDTO;
 import com.demo.project.models.Startup;
 import com.demo.project.repositories.StartupRepository;
 import com.demo.project.repositories.UserRepository;
 
-import DTOS.StartupDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service

@@ -12,7 +12,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 @Data
@@ -30,12 +32,13 @@ public class Investor {
     )
     private String businessRegistrationNumber;
 	
-	@NotEmpty(message="Investment Amount is required")
+	@NotNull(message="Investment Amount is required")
 	private int investmentAmount;
 	
 	@NotEmpty(message="Investment Amount is required")
 	private String message;
 	
+	@Email
 	@NotEmpty(message="Investor email is required")
 	private String investorEmail;
     

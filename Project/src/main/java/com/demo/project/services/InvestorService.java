@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import com.demo.project.DTOS.InvestorDTO;
 import com.demo.project.models.Investor;
 import com.demo.project.repositories.InvestorRepository;
 import com.demo.project.repositories.UserRepository;
 
-import DTOS.InvestorDTO;
 import lombok.RequiredArgsConstructor;
 
 

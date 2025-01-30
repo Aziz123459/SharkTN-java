@@ -7,11 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import com.demo.project.DTOS.UserDTO;
 import com.demo.project.models.Role;
 import com.demo.project.models.User;
 import com.demo.project.repositories.UserRepository;
 
-import DTOS.UserDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service

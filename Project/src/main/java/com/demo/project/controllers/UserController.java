@@ -1,4 +1,4 @@
-package controllers;
+package com.demo.project.controllers;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.project.DTOS.UserDTO;
 import com.demo.project.models.Role;
 import com.demo.project.services.UserService;
 
-import DTOS.UserDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
