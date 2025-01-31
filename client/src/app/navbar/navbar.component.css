@@ -1,0 +1,61 @@
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 10; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    height: 100px;
+  }
+  
+  .logo img {
+    height: 100px;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  .nav-links a {
+    color: white !important; /* Texte blanc */
+    text-transform: none;
+    margin-left: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    transition: background-color 0.3s ease; /* Transition pour hover */
+  }
+  
+  .nav-links a:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Fond plus foncé au survol */
+  }
+  
+  .auth-button {
+    background-color: black !important; /* Fond noir */
+    color: white !important; /* Texte blanc */
+    margin-left: 16px;
+    font-weight: bold;
+    text-transform: none; /* Empêche les majuscules */
+    padding: 8px 16px;
+    border-radius: 8px; /* Coins arrondis pour les boutons aussi */
+  }
+  
+  .auth-button:hover {
+    background-color: #333 !important; /* Noir plus clair au survol */
+    opacity: 0.9;
+  }
+  
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  

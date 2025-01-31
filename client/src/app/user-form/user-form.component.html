@@ -1,0 +1,68 @@
+<div class="main p-5">
+    <section class="signup">
+        <div class="container pt-5">
+            <div class="signup-content p-5">
+                <div class="signup-form">
+                    <h2 class="form-title pb-5">Sign up</h2>
+                    <form (ngSubmit)="createUser()" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="fullname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" [(ngModel)]="new.fullname" name="fullname" id="fullname" placeholder="Your full Name"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" name="email" id="email" [(ngModel)]="new.email" placeholder="Your Email"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="birth"><i class="zmdi zmdi-email"></i></label>
+                            <input type="date" name="birth" id="birth" [(ngModel)]="new.birth" />
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="zmdi zmdi-email"></i></label>
+                            <input type="number" name="phone" id="phone" [(ngModel)]="new.phone" placeholder="Your Phone Number" />
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="Adress"><i class="zmdi zmdi-email"></i></label>
+                            <input type="text" name="adress" id="adress" [(ngModel)]="new.adress" placeholder="Your Adress"/>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="password" [(ngModel)]="new.password" id="pass" placeholder="Password"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="confirm" [(ngModel)]="new.confirm" id="re_pass" placeholder="confirm your password"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Choose your account type :</label>
+                            <select name="role" id="role" class="styled-select" aria-label="Default select" [(ngModel)]="new.role">
+                                <option value="" disabled selected>Choose a role</option>
+                                <option value="ROLE_INVESTOR">Investor</option>
+                                <option value="ROLE_STARTUP_FOUNDER">Startup Founder</option>
+                            </select>
+                            
+                        </div>
+                        
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="assets\signin-image.jpg" alt="sing up image"></figure>
+                    <div class="d-flex gap-5 pt-5 ps-5">
+                        <a routerLink="/authenticate" class="signup-image-link">I am already member</a>
+                        <a routerLink="/" class="signup-image-link">Back to Home</a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </section>

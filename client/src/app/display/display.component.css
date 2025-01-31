@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .vh-100 {
+    height: 100vh;
+  }
+  
+  .card {
+    max-width: 800px;
+    margin: auto;
+
+  }
+  
+  .page{
+    background-image: url('/assests/bgImage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0; 
+}
+
+.bg{
+    background-color: #1D262F;
+}

@@ -1,0 +1,242 @@
+<!-- Investor Stepper -->
+<div *ngIf="type === 'ROLE_INVESTOR'" class="bgColor container pt-5 vh-100">
+  <mat-horizontal-stepper [linear]="true">
+    <!-- Step 1 -->
+    <mat-step>
+      <h2 class="mb-4 text-primary text-center">Investor Registration</h2>
+      <form [formGroup]="investorFormGroup">
+        <div class="mb-3">
+          <label for="businessRegistrationNumber" class="form-label">Business Registration Number:</label>
+          <input
+            matInput
+            formControlName="businessRegistrationNumber"
+            [(ngModel)]="investorData.businessRegistrationNumber"
+            name="businessRegistrationNumber"
+            id="businessRegistrationNumber"
+            class="form-control"
+            placeholder="Enter your business registration number"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="investorEmail" class="form-label">Your Email:</label>
+          <input
+            matInput
+            formControlName="investorEmail"
+            [(ngModel)]="investorData.investorEmail"
+            name="investorEmail"
+            id="investorEmail"
+            class="form-control"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2 -->
+    <mat-step>
+      <h2 class="mb-4 text-primary text-center">Investment Details</h2>
+      <form [formGroup]="investorFormGroup">
+        <div class="mb-3">
+          <label for="investmentAmount" class="form-label">Investment Amount:</label>
+          <input
+            matInput
+            formControlName="investmentAmount"
+            [(ngModel)]="investorData.investmentAmount"
+            name="investmentAmount"
+            id="investmentAmount"
+            class="form-control"
+            placeholder="Enter the amount you want to invest"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message:</label>
+          <textarea
+            matInput
+            formControlName="message"
+            [(ngModel)]="investorData.message"
+            name="message"
+            id="message"
+            class="form-control"
+            rows="3"
+            placeholder="Enter your message"
+          ></textarea>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" (click)="submitInvestor()">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<!-- Startup Stepper -->
+<div *ngIf="type === 'ROLE_STARTUP_FOUNDER'" class="bgColor container pt-5 vh-100">
+  <mat-horizontal-stepper [linear]="true">
+    <!-- Step 1 -->
+    <mat-step>
+      <h2 class="mb-4 text-success text-center">Startup Registration</h2>
+      <form [formGroup]="startupFormGroup">
+        <div class="mb-3">
+          <label for="startupName" class="form-label">Startup Name:</label>
+          <input
+            matInput
+            formControlName="startupName"
+            [(ngModel)]="startupData.startupName"
+            name="startupName"
+            id="startupName"
+            class="form-control"
+            placeholder="Enter your startup name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="startupEmail" class="form-label">Startup Email:</label>
+          <input
+            matInput
+            formControlName="startupEmail"
+            [(ngModel)]="startupData.startupEmail"
+            name="startupEmail"
+            id="startupEmail"
+            class="form-control"
+            placeholder="Enter your startup email"
+          />
+        </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+<!-- Step 2 -->
+<mat-step>
+  <h2 class="mb-4 text-success text-center">Additional Details</h2>
+  <form [formGroup]="startupFormGroup">
+    <div class="mb-3">
+      <label for="teamNumber" class="form-label">Number of Team Members:</label>
+      <input
+        matInput
+        formControlName="teamNumber"
+        [(ngModel)]="startupData.teamNumber"
+        name="teamNumber"
+        id="teamNumber"
+        class="form-control"
+        placeholder="Enter the number of team members"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="BriefDescription" class="form-label">Brief Description:</label>
+      <textarea
+        matInput
+        formControlName="briefDescription"
+        [(ngModel)]="startupData.BriefDescription"
+        name="BriefDescription"
+        id="BriefDescription"
+        class="form-control"
+        rows="3"
+        placeholder="Enter a brief description of your startup"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="industry" class="form-label">Industry:</label>
+      <input
+        matInput
+        formControlName="industry"
+        [(ngModel)]="startupData.Industry"
+        name="Industry"
+        id="Industry"
+        class="form-control"
+        placeholder="Enter your Industry"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="BusinessRegistrationNumber" class="form-label">Business Registration Number:</label>
+      <input
+        matInput
+        formControlName="businessRegistrationNumber"
+        [(ngModel)]="startupData.BusinessRegistrationNumber"
+        name="BusinessRegistrationNumber"
+        id="BusinessRegistrationNumber"
+        class="form-control"
+        placeholder="Enter your business registration number"
+      />
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </form>
+</mat-step>
+
+
+    <!-- Step 3 -->
+    <mat-step>
+      <h2 class="mb-4 text-success text-center">Upload Documents</h2>
+      <form>
+        <div class="mb-3">
+          <label for="StartupLogo" class="form-label">Startup Logo:</label>
+          <input
+            type="file"
+            id="StartupLogo"
+            [(ngModel)]="startupData.StartupLogo"
+            name="StartupLogo"
+            class="form-control"
+            (change)="onFileSelected($event, 0)"
+          />
+          <small class="form-text text-muted">
+            {{ selectedFile[0]?.name || 'No file selected' }}
+          </small>
+        </div>
+
+        <div class="mb-3">
+          <label for="UploadGovernmentIssuedID" class="form-label">Government Issued ID:</label>
+          <input
+            type="file"
+            id="UploadGovernmentIssuedID"
+            [(ngModel)]="startupData.UploadGovernmentIssuedID"
+            name="UploadGovernmentIssuedID"
+            class="form-control"
+            (change)="onFileSelected($event, 1)"
+          />
+          <small class="form-text text-muted">
+            {{ selectedFile[1]?.name || 'No file selected' }}
+          </small>
+        </div>
+
+        <div class="mb-3">
+          <label for="UploadBusinessRegistrationCertificate" class="form-label">Business Registration Certificate:</label>
+          <input
+            type="file"
+            id="UploadBusinessRegistrationCertificate"
+            [(ngModel)]="startupData.UploadBusinessRegistrationCertificate"
+            name="UploadBusinessRegistrationCertificate"
+            class="form-control"
+            (change)="onFileSelected($event, 2)"
+          />
+          <small class="form-text text-muted">
+            {{ selectedFile[2]?.name || 'No file selected' }}
+          </small>
+        </div>
+
+        <div class="mb-3">
+          <label for="LinkedInorSocialMediaProfile" class="form-label">LinkedIn or Social Media Profile:</label>
+          <input
+            type="text"
+            id="LinkedInorSocialMediaProfile"
+            [(ngModel)]="startupData.LinkedInorSocialMediaProfile"
+            name="LinkedInorSocialMediaProfile"
+            class="form-control"
+            placeholder="Enter your LinkedIn or Social Media Profile URL"
+          />
+        </div>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" (click)="submitStartup()">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

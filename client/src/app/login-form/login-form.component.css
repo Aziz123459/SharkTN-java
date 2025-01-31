@@ -1,0 +1,166 @@
+/* General styling for the sign-in section */
+.sign-in {
+    padding: 75px 0;
+    background: #f8f8f8;
+}
+
+.signin-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.signin-image {
+    flex: 1;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.signin-image img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+}
+
+.signin-image img:hover {
+    transform: scale(1.1);
+}
+
+.signup-image-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.signup-image-link:hover {
+    color: #0056b3;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    text-decoration: underline;
+}
+
+.signin-form {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.form-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    background: #fff;
+    outline: none;
+}
+
+.form-group input:focus + label {
+    color: #007bff;
+    font-size: 12px;
+    top: -10px;
+}
+
+.label-agree-term {
+    font-size: 14px;
+    color: #777;
+}
+
+.form-button {
+    text-align: center;
+}
+
+.form-submit {
+    display: inline-block;
+    background: #6dabe4;
+    color: #fff;
+    padding: 15px 39px;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-submit:hover {
+    background: #4292dc;
+}
+
+.social-login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.socials {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.socials li {
+    display: inline-block;
+}
+
+.socials a {
+    font-size: 20px;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.socials a:hover {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}

@@ -1,0 +1,15 @@
+.page{
+    background-color: #e2e8f0;    
+    padding: 25px;
+}
+
+.effect{
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+
+  .effect:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }

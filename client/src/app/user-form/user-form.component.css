@@ -1,0 +1,204 @@
+/* Simplified Styles */
+
+.display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.display-flex-center {
+    justify-content: center;
+}
+
+.list-type-ulli, .socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.poppins-regular {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+.poppins-italic {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+
+/* Repeat similar @font-face rules for other font weights */
+
+
+
+input, select, textarea {
+    outline: none;
+    appearance: none;
+    margin: 0;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+
+img{
+    overflow: hidden; 
+    width: 300px; 
+    height: 200px; 
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s ease-in-out; 
+}
+
+img:hover {
+    transform: scale(1.1); 
+    cursor: pointer;
+}
+
+figure {
+    margin: 0;
+}
+
+p {
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #777;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
+}
+
+body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #222;
+    background: #f8f8f8;
+}
+
+.container {
+    width: 900px;
+    background: #fff;
+    margin: auto;
+    box-shadow: 0 15px 17px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.form-submit {
+    display: inline-block;
+    background: #6dabe4;
+    color: #fff;
+    padding: 15px 39px;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-submit:hover {
+    background: #4292dc;
+}
+
+/* Additional rules for forms and elements */
+.signup-content, .signin-content {
+    padding: 75px 0;
+}
+
+.signup-image, .signin-image {
+    margin: 0 55px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 6px 30px;
+    border: none;
+    border-bottom: 1px solid #999;
+}
+
+input:focus {
+    border-bottom: 1px solid #222;
+}
+
+/* General container styling for the form group */
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+    width: 100%;
+}
+
+/* Styling for the select element */
+.styled-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    appearance: none; /* Removes default browser styling */
+    background-color: #fff;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Cpath fill="%23999" d="M5 7l5 5 5-5H5z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* On focus */
+.styled-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Optional - Ensures better alignment for mobile */
+.styled-select::-ms-expand {
+    display: none;
+}
+
+/* Optional - Add hover effect */
+.styled-select:hover {
+    border-color: #555;
+}
+/* Styling for the signup-image-link */
+.signup-image-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #007bff; /* Bright blue for visibility */
+    font-weight: 500;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Add hover effect */
+.signup-image-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle glow */
+    text-decoration: underline; /* Highlight link hover */
+}
+
+/* Add focus effect for accessibility */
+.signup-image-link:focus {
+    outline: 2px solid #007bff; /* Focus outline */
+    outline-offset: 2px;
+}
+
+.main{
+    background-color: #F5F5F5;
+}

@@ -32,9 +32,11 @@ public class AuthenticationService {
 				.build();
 		repository.save(user);
 		var jwtToken= jwtService.generateToken(user, user.getId());
+		var id =user.getId();
 		return AuthenticationResponse.builder()
 				.role(user.getRole())
 				.token(jwtToken)
+				.id(id)
 				.build();
 	}
 
@@ -49,9 +51,12 @@ public class AuthenticationService {
 		var user=repository.findByEmail(request.getEmail())
 				.orElseThrow();
 		var jwtToken= jwtService.generateToken(user, user.getId());
+		var role=user.getRole();
+		var id =user.getId();
 		return AuthenticationResponse.builder()
-				.role(user.getRole())
+				.id(id)
 				.token(jwtToken)
+				.role(role)
 				.build();
 	}
 
