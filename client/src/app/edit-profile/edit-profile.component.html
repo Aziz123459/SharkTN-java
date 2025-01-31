@@ -87,7 +87,7 @@
                                 <h6 class="mb-0">Industry</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input name="Industry" type="text" class="form-control" [(ngModel)]="dataStartup.Industry">
+                                <input name="Industry" type="text" class="form-control" [(ngModel)]="dataStartup.industry">
                             </div>
                         </div>
                         <div *ngIf="type === 'startup'" class="row mb-3">
@@ -95,7 +95,7 @@
                                 <h6 class="mb-0">Description</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <textarea style="height: 150px;" [(ngModel)]="dataStartup.BriefDescription" class="form-control" name="BriefDescription" id=""></textarea>
+                                <textarea style="height: 150px;" [(ngModel)]="dataStartup.briefDescription" class="form-control" name="briefDescription" id=""></textarea>
                             </div>
                         </div>
                         <div *ngIf="type === 'investor'" class="row mb-3">
@@ -111,7 +111,7 @@
                                 <h6 class="mb-0">Investor Message</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <textarea style="height: 150px;" [(ngModel)]="dataInvestor.message" class="form-control" name="BriefDescription" id=""></textarea>
+                                <textarea style="height: 150px;" [(ngModel)]="dataInvestor.message" class="form-control" name="briefDescription" id=""></textarea>
                                 <!-- <input name="BriefDescription" type="text" class="form-control" [(ngModel)]="dataInvestor.message"> -->
                             </div>
                         </div>

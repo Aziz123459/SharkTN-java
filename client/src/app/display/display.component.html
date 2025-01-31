@@ -25,10 +25,10 @@
           <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
         </div>
         <p><strong>Name:</strong> {{ startupData.startupName }}</p>
-        <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+        <p><strong>Industry:</strong> {{ startupData.industry }}</p>
         <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
-        <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.LinkedInorSocialMediaProfile }}"> {{ startupData.LinkedInorSocialMediaProfile }}</a></p>
-        <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+        <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.linkedInorSocialMediaProfile }}"> {{ startupData.linkedInorSocialMediaProfile }}</a></p>
+        <p><strong>Description:</strong> {{ startupData.briefDescription }}</p>
       </div>
     </div>
   </div>
@@ -44,10 +44,10 @@
       <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
     </div>
     <p><strong>Name:</strong> {{ startupData.startupName }}</p>
-    <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+    <p><strong>Industry:</strong> {{ startupData.industry }}</p>
     <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
-    <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.LinkedInorSocialMediaProfile }}"> {{ startupData.LinkedInorSocialMediaProfile }}</a></p>
-    <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+    <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.linkedInorSocialMediaProfile }}"> {{ startupData.linkedInorSocialMediaProfile }}</a></p>
+    <p><strong>Description:</strong> {{ startupData.briefDescription }}</p>
   </div>
   <div class="p-2 text-end">        
     <button (click)="sendEmail()" [disabled]="!startupData.startupEmail" class="btn btn-primary btn-sm">Contact By Email</button>

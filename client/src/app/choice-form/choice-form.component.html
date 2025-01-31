@@ -127,13 +127,13 @@
       />
     </div>
     <div class="mb-3">
-      <label for="BriefDescription" class="form-label">Brief Description:</label>
+      <label for="briefDescription" class="form-label">Brief Description:</label>
       <textarea
         matInput
         formControlName="briefDescription"
-        [(ngModel)]="startupData.BriefDescription"
-        name="BriefDescription"
-        id="BriefDescription"
+        [(ngModel)]="startupData.briefDescription"
+        name="briefDescription"
+        id="briefDescription"
         class="form-control"
         rows="3"
         placeholder="Enter a brief description of your startup"
@@ -144,21 +144,21 @@
       <input
         matInput
         formControlName="industry"
-        [(ngModel)]="startupData.Industry"
-        name="Industry"
-        id="Industry"
+        [(ngModel)]="startupData.industry"
+        name="industry"
+        id="industry"
         class="form-control"
         placeholder="Enter your Industry"
       />
     </div>
     <div class="mb-3">
-      <label for="BusinessRegistrationNumber" class="form-label">Business Registration Number:</label>
+      <label for="businessRegistrationNumber" class="form-label">Business Registration Number:</label>
       <input
         matInput
         formControlName="businessRegistrationNumber"
-        [(ngModel)]="startupData.BusinessRegistrationNumber"
-        name="BusinessRegistrationNumber"
-        id="BusinessRegistrationNumber"
+        [(ngModel)]="startupData.businessRegistrationNumber"
+        name="businessRegistrationNumber"
+        id="businessRegistrationNumber"
         class="form-control"
         placeholder="Enter your business registration number"
       />
@@ -179,9 +179,9 @@
           <label for="StartupLogo" class="form-label">Startup Logo:</label>
           <input
             type="file"
-            id="StartupLogo"
-            [(ngModel)]="startupData.StartupLogo"
-            name="StartupLogo"
+            id="startupLogo"
+            [(ngModel)]="startupData.startupLogo"
+            name="startupLogo"
             class="form-control"
             (change)="onFileSelected($event, 0)"
           />
@@ -191,12 +191,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="UploadGovernmentIssuedID" class="form-label">Government Issued ID:</label>
+          <label for="uploadGovernmentIssuedID" class="form-label">Government Issued ID:</label>
           <input
             type="file"
             id="UploadGovernmentIssuedID"
-            [(ngModel)]="startupData.UploadGovernmentIssuedID"
-            name="UploadGovernmentIssuedID"
+            [(ngModel)]="startupData.uploadGovernmentIssuedID"
+            name="uploadGovernmentIssuedID"
             class="form-control"
             (change)="onFileSelected($event, 1)"
           />
@@ -206,12 +206,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="UploadBusinessRegistrationCertificate" class="form-label">Business Registration Certificate:</label>
+          <label for="uploadBusinessRegistrationCertificate" class="form-label">Business Registration Certificate:</label>
           <input
             type="file"
-            id="UploadBusinessRegistrationCertificate"
-            [(ngModel)]="startupData.UploadBusinessRegistrationCertificate"
-            name="UploadBusinessRegistrationCertificate"
+            id="uploadBusinessRegistrationCertificate"
+            [(ngModel)]="startupData.uploadBusinessRegistrationCertificate"
+            name="uploadBusinessRegistrationCertificate"
             class="form-control"
             (change)="onFileSelected($event, 2)"
           />
@@ -225,8 +225,8 @@
           <input
             type="text"
             id="LinkedInorSocialMediaProfile"
-            [(ngModel)]="startupData.LinkedInorSocialMediaProfile"
-            name="LinkedInorSocialMediaProfile"
+            [(ngModel)]="startupData.linkedInorSocialMediaProfile"
+            name="linkedInorSocialMediaProfile"
             class="form-control"
             placeholder="Enter your LinkedIn or Social Media Profile URL"
           />

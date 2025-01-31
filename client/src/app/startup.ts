@@ -1,13 +1,13 @@
 export interface Startup {
     id?:string 
     startupName?:string
-    StartupLogo?:string
-    BusinessRegistrationNumber?:string
-    Industry?:string
-    BriefDescription?:string
-    UploadGovernmentIssuedID?:string
-    UploadBusinessRegistrationCertificate?:string
-    LinkedInorSocialMediaProfile?:string
+    startupLogo?:string
+    businessRegistrationNumber?:string
+    industry?:string
+    briefDescription?:string
+    uploadGovernmentIssuedID?:string
+    uploadBusinessRegistrationCertificate?:string
+    linkedInorSocialMediaProfile?:string
     teamNumber?:Number
     userId?:string | null
     startupEmail?:string

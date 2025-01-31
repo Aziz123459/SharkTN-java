@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home-navbar.component.css'
 })
 export class HomeNavbarComponent {
-  type = localStorage.getItem("acctype");
+  type = localStorage.getItem("role");
   id = localStorage.getItem("userId");
 
   constructor(private apiService: ApiService, private router: Router) {}
@@ -24,7 +24,7 @@ export class HomeNavbarComponent {
         console.log('User logged out successfully');
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
-        localStorage.removeItem('acctype');
+        localStorage.removeItem('role');
         this.router.navigate(['/login']);
       },
       error: (err) => {

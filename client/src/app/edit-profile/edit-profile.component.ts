@@ -59,7 +59,7 @@ export class EditProfileComponent {
     })
 
     if(this.type=="startup"){
-      const data2={id:this.dataStartup.id,startupName:this.dataStartup.startupName,teamNumber:this.dataStartup.teamNumber,Industry:this.dataStartup.Industry,BriefDescription:this.dataStartup.BriefDescription}
+      const data2={id:this.dataStartup.id,startupName:this.dataStartup.startupName,teamNumber:this.dataStartup.teamNumber,industry:this.dataStartup.industry,BriefDescription:this.dataStartup.briefDescription}
       this.apiService.updateStartup(data2).subscribe({
         next:res=>this.router.navigate([`/profile/${this.userId}`]),
 

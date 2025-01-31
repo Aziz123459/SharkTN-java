@@ -24,7 +24,7 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/favorites/${id}`);
   }
   getstartups(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/all/startup`)
+    return this.http.get(`${this.baseUrl}/all/startups`)
   }
 
   getstartup(id:String | undefined |null): Observable<any>{
@@ -40,7 +40,7 @@ export class ApiService {
   }
 
   getinvestors(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/investor`)
+    return this.http.get(`${this.baseUrl}/all/investors`)
   }
 
   getusers(): Observable<any>{

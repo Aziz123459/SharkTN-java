@@ -35,8 +35,8 @@
           </div>
           <div class="card-body">
             <p><strong>Name:</strong> {{ startup.startupName }}</p>
-            <p><strong>Industry:</strong> {{ startup.Industry }}</p>
-            <p><strong>Description:</strong> {{ startup.BriefDescription }}</p>
+            <p><strong>Industry:</strong> {{ startup.industry }}</p>
+            <p><strong>Description:</strong> {{ startup.briefDescription }}</p>
             <p><strong>Team Number:</strong> {{ startup.teamNumber }}</p>
           </div>
         </div>
@@ -59,10 +59,10 @@
           <div class="card-body">
             <ng-container *ngIf="isStartup(entry)">
               <p><strong>Name:</strong> {{ entry.startupName }}</p>
-              <p><strong>Industry:</strong> {{ entry.Industry }}</p>
+              <p><strong>Industry:</strong> {{ entry.industry }}</p>
               <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
               <p><strong>Startup Email:</strong> {{ entry.startupEmail }}</p>
-              <p><strong>Description:</strong> {{ entry.BriefDescription }}</p>
+              <p><strong>Description:</strong> {{ entry.briefDescription }}</p>
             </ng-container>
           </div>
         </div>

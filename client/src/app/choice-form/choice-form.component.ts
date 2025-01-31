@@ -51,7 +51,6 @@ export class ChoiceFormComponent implements OnInit {
 
     // Initialize FormGroups
     this.investorFormGroup = this.fb.group({
-      businessRegistrationNumber: ['', Validators.required],
       investorEmail: ['', [Validators.required, Validators.email]],
       investmentAmount: ['', [Validators.required, Validators.min(1)]],
       message: ['', Validators.maxLength(500)],
@@ -62,6 +61,11 @@ export class ChoiceFormComponent implements OnInit {
       startupEmail: ['', [Validators.required, Validators.email]],
       teamNumber: ['', Validators.required],
       briefDescription: ['', Validators.maxLength(500)],
+      industry: ['', Validators.required],
+      businessRegistrationNumber: ['', Validators.required],
+      uploadGovernmentIssuedID:['', Validators.required],
+      startupLogo:['', Validators.required],
+      uploadBusinessRegistrationCertificate:['',Validators.required]
     });
   }
 
@@ -73,10 +77,9 @@ export class ChoiceFormComponent implements OnInit {
           console.log('Investor created successfully:', response);
           this.router.navigate(['/home', this.type]);
         },
-        // // error: (err) => {
-        // //   console.error('Error creating investor:', err);
-        // //   this.errorMessage = 'Failed to create investor. Please try again.';
-        // },
+        error: (err) => {
+          console.error('Error creating investor:', err);
+        },
       });
     }
   }
@@ -89,9 +92,9 @@ export class ChoiceFormComponent implements OnInit {
     if (this.startupData) {
       this.startupData = {
         ...this.startupData,
-        StartupLogo: this.selectedFile[0].name,
-        UploadGovernmentIssuedID: this.selectedFile[1].name,
-        UploadBusinessRegistrationCertificate: this.selectedFile[2].name,
+        startupLogo: this.selectedFile[0].name,
+        uploadGovernmentIssuedID: this.selectedFile[1].name,
+        uploadBusinessRegistrationCertificate: this.selectedFile[2].name,
       };
       this.startupData.userId = this.userId;
       this.apiService.creatStartup(this.startupData).subscribe({
@@ -107,10 +110,9 @@ export class ChoiceFormComponent implements OnInit {
           console.log('Startup created successfully:', response);
           this.router.navigate(['/home', this.type]);
         },
-        // error: (err) => {
-        //   console.error('Error creating startup:', err);
-        //   this.errorMessage = 'Failed to create startup. Please try again.';
-        // },
+        error: (err) => {
+          console.error('Error creating startup:', err);
+        },
       });
     }
   }

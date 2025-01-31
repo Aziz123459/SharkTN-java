@@ -42,27 +42,27 @@ public class Startup {
 	private String startupName;
 	
 	@NotEmpty(message="Startup logo is required")
-	private String StartupLogo;
+	private String startupLogo;
 	
 	@NotEmpty(message = "Business Registration Number is required.")
     @Pattern(
         regexp = "^[0-9]{7}[A-Za-z]$",
         message = "Business Registration Number must be 7 digits followed by one letter."
     )
-    private String BusinessRegistrationNumber;
+    private String businessRegistrationNumber;
 	
 	@NotEmpty(message="Industry is required")
-	private String Industry;
+	private String industry;
 	
 	
 	@NotEmpty(message="Description is required")
-	private String BriefDescription;
+	private String briefDescription;
 	
 	@NotEmpty(message="Government IssuedID is required")
-	private String UploadGovernmentIssuedID;
+	private String uploadGovernmentIssuedID;
 	
 	@NotEmpty(message="Business Registration Certificate is required")
-	private String UploadBusinessRegistrationCertificate;
+	private String uploadBusinessRegistrationCertificate;
 	
 	private int teamNumber;
 	    
