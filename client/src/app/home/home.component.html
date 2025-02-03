@@ -31,7 +31,7 @@
       <div *ngFor="let startup of allStartups" >
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
           <div class="card-header text-center">
-            <img *ngIf="type === 'ROLE_ADMIN'" src="http://localhost:5000/uploads/{{startup.StartupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+            <img *ngIf="type === 'ROLE_ADMIN'" src="http://localhost:5000/uploads/{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
           </div>
           <div class="card-body">
             <p><strong>Name:</strong> {{ startup.startupName }}</p>
@@ -54,7 +54,7 @@
       <div *ngFor="let entry of item"  class="">
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry.id)">
           <div class="card-header">
-            <img *ngIf="isStartup(entry)" src="http://localhost:5000/uploads/{{entry.StartupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+            <img *ngIf="isStartup(entry)" src="http://localhost:5000/uploads/{{entry.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
           </div>
           <div class="card-body">
             <ng-container *ngIf="isStartup(entry)">

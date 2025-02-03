@@ -31,6 +31,8 @@ export class UserFormComponent {
         // this.router.navigate(['/'])
       },
       error: (err) => {
+        console.log(this.new);
+        
         this.errorMessage = err;
         console.error(err);
       }

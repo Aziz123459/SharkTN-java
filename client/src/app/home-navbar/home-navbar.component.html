@@ -6,7 +6,7 @@
       </div>
     
       <nav class="nav-links">
-        <a mat-button routerLink="/home/{{role}}">Home</a>
+        <!-- <a mat-button routerLink="/home/{{role}}">Home</a> -->
         <a mat-button routerLink="/profile/{{id}}" >Profile</a>
         <button mat-button *ngIf="type === 'ADMIN'" routerLink="/admin-dashboard" class="auth-button">Admin</button>
         <button mat-button (click)="onLogout()" class="auth-button">Logout</button>

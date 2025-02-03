@@ -15,7 +15,7 @@ import { Investor } from '../investor';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  type: string | null = null;
+  role: string | null = null;
   user : User ={}
   dataStartup : Startup ={}
   dataInvestor : Investor ={}
@@ -25,7 +25,7 @@ export class ProfileComponent {
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.type= localStorage.getItem('acctype');
+    this.role= localStorage.getItem('role');
     this.userId= localStorage.getItem('userId');
     console.log(this.userId);
     

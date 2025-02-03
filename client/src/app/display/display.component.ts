@@ -14,7 +14,7 @@ import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
   styleUrl: './display.component.css'
 })
 export class DisplayComponent {
-type: 'investor' | 'startup' | 'admin' |undefined;
+role: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN' |undefined;
   id: string | undefined |null;
   investorData: Investor = {} as Investor;
   startupData: Startup = {} as Startup;
@@ -22,23 +22,26 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup' | 'admin';
+    this.role = localStorage.getItem('role') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN';
+    console.log(this.role);
+
+    
     this.id= this.route.snapshot.paramMap.get('id');
 
-    if (this.type && this.id) {
+    if (this.role && this.id) {
       this.fetchDetails();
     }
   }
 
   fetchDetails(): void {
-    if (this.type === 'startup' || this.type === 'admin') {
+    if (this.role === 'ROLE_STARTUP_FOUNDER' || this.role === 'ROLE_ADMIN') {
       // Fetch investor details for a startup user
       this.apiService.getinvestor(this.id).subscribe({
         next: (data: Investor) => (this.investorData = data),
         error: (err) => console.error('Error fetching investor details:', err)
       });
     } 
-    if (this.type === 'investor' || this.type === 'admin') {
+    if (this.role === 'ROLE_INVESTOR' || this.role === 'ROLE_ADMIN') {
       // Fetch startup details for an investor user
       this.apiService.getstartup(this.id).subscribe({
         next: (data: Startup) => (this.startupData = data),
@@ -49,9 +52,9 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   
   
   sendEmail(): void {
-    console.log('type:', this.type);
+    console.log('role:', this.role);
     const email =
-      this.type === 'startup'
+      this.role === 'ROLE_STARTUP_FOUNDER'
         ? this.investorData.investorEmail
         : this.startupData.startupEmail ;
         console.log('Email:', email);

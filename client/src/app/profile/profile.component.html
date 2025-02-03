@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="card mt-3 ">
-              <ul *ngIf="type === 'investor'" class="list-group list-group-flush">
+              <ul *ngIf="role === 'ROLE_INVESTOR'" class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
                   <span class="text-secondary">https://bootdey.com</span>
@@ -43,15 +43,15 @@
                   <span class="text-secondary">bootdey</span>
                 </li>
               </ul>
-              <div *ngIf="type === 'startup'" class="text-center p-3">
+              <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="text-center p-3">
                 <h4 class="pt-3 pb-4">Startup Logo</h4>
-                <img src="http://localhost:5000/uploads/{{dataStartup.StartupLogo}}" alt="Logo" height="250px" width="250px" style="border-radius: 50%;">
+                <img src="http://localhost:5000/uploads/{{dataStartup.startupLogo}}" alt="Logo" height="250px" width="250px" style="border-radius: 50%;">
               </div>
             </div>
           </div>
           <div class="col-md-8">
             <div class="card mb-3">
-              <div *ngIf="type === 'startup'" class="card-body">
+              <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="card-body">
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Startup Name</h6>
@@ -106,7 +106,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="type === 'investor'" class="card-body">
+              <div *ngIf="role === 'ROLE_INVESTOR'" class="card-body">
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Email</h6>
@@ -148,11 +148,11 @@
             <div class="row gutters-sm">
               <div class=" mb-3">
                 <div class="card h-100">
-                  <div *ngIf="type === 'startup'" class="card-body">
+                  <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="card-body">
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Startup Pitch</h6>
                     <p>{{dataStartup.briefDescription}}</p>
                   </div>
-                  <div *ngIf="type === 'investor'" class="card-body">
+                  <div *ngIf="role === 'ROLE_INVESTOR'" class="card-body">
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Investor Message</h6>
                     <p>{{dataInvestor.message}}</p>
                   </div>
@@ -207,19 +207,19 @@
             <h4 class="card-title mb-4">SharkTN</h4>
             <p class="card-text">Startup Owner</p>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Alex Arawles" aria-label="text" aria-describedby="basic-addon1" disabled>
+              <input role="text" class="form-control" placeholder="Alex Arawles" aria-label="text" aria-describedby="basic-addon1" disabled>
             </div>
             <p class="card-text">My Startup Email Address</p>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="alexarawles@gmail.com" aria-label="Email" aria-describedby="basic-addon1" disabled>
+              <input role="text" class="form-control" placeholder="alexarawles@gmail.com" aria-label="Email" aria-describedby="basic-addon1" disabled>
             </div>            
             <p class="card-text">Phone Number</p>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="+216 99 999 999" aria-label="Email" aria-describedby="basic-addon1" disabled>
+                <input role="text" class="form-control" placeholder="+216 99 999 999" aria-label="Email" aria-describedby="basic-addon1" disabled>
             </div>
             <p class="card-text">Industry</p>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Technology" aria-label="Email" aria-describedby="basic-addon1" disabled>
+                <input role="text" class="form-control" placeholder="Technology" aria-label="Email" aria-describedby="basic-addon1" disabled>
             </div>  
           </div>
         </div>
@@ -246,7 +246,7 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="fullName" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="fullName" placeholder="Your First Name">
+                  <input role="text" class="form-control" id="fullName" placeholder="Your First Name">
                 </div>
                 <div class="mb-3">
                   <label for="gender" class="form-label">Gender</label>
@@ -270,7 +270,7 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="nickName" class="form-label">Nick Name</label>
-                  <input type="text" class="form-control" id="nickName" placeholder="Your First Name">
+                  <input role="text" class="form-control" id="nickName" placeholder="Your First Name">
                 </div>
                 <div class="mb-3">
                   <label for="country" class="form-label">Country</label>

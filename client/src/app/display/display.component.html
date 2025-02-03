@@ -2,9 +2,9 @@
 <div class="page d-flex justify-content-center align-items-center vh-100">
 <div class="container">
   <!-- Admin Display All Users -->
-  <div *ngIf="type === 'admin'" class="mt-4">
+  <div *ngIf="role === 'ROLE_ADMIN'" class="mt-4">
     <!-- Display All Investors -->
-    <div *ngIf="investorData && investorData.id && type ==='admin'" class="mt-4 card shadow-sm">
+    <div *ngIf="investorData && investorData.id && role ==='ROLE_ADMIN'" class="mt-4 card shadow-sm">
       <div class="card-header bg-secondary text-white">
         <h2 class="card-title">Investor Details</h2>
       </div>
@@ -16,13 +16,13 @@
     </div>
       
     <!-- Display All Startups -->
-    <div *ngIf="startupData && startupData.id && type==='admin'" class="card shadow-sm">
+    <div *ngIf="startupData && startupData.id && role==='ROLE_ADMIN'" class="card shadow-sm">
       <div class="card-header bg text-white">
         <h2 class="card-title">Startup Details</h2>
       </div>
       <div class="card-body  p-3 ">
         <div class="text-center">
-          <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
+          <img src="http://localhost:5000/uploads/{{startupData.startupLogo}}" alt="Logo" width="100px">
         </div>
         <p><strong>Name:</strong> {{ startupData.startupName }}</p>
         <p><strong>Industry:</strong> {{ startupData.industry }}</p>
@@ -35,13 +35,13 @@
 
   <!-- Investor or Startup for Non-Admin -->
  <!-- Startup Details -->
- <div *ngIf="type === 'investor' && startupData.id" class="card shadow-sm">
+ <div *ngIf="role === 'ROLE_INVESTOR' && startupData.id" class="card shadow-sm">
   <div class="card-header bg text-white">
     <h2 class="card-title">Startup Details</h2>
   </div>
   <div class="card-body">
     <div class="text-center">
-      <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
+      <img src="http://localhost:5000/uploads/{{startupData.startupLogo}}" alt="Logo" width="100px">
     </div>
     <p><strong>Name:</strong> {{ startupData.startupName }}</p>
     <p><strong>Industry:</strong> {{ startupData.industry }}</p>
@@ -56,7 +56,7 @@
 </div>
 
    <!-- Investor Details -->
-   <div *ngIf="type === 'startup'  && investorData.id" class="card shadow-sm mb-4">
+   <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'  && investorData.id" class="card shadow-sm mb-4">
     <div class="card-header bg-secondary text-white">
       <h2 class="card-title">Investor Details</h2>
     </div>
