@@ -55,7 +55,7 @@ export class HomeComponent {
       });}
       else if (this.type === 'ROLE_ADMIN') {
         // Fetch all investors for an admin
-        this.apiService.getAllInvestors().subscribe({
+        this.apiService.getinvestors().subscribe({
           next: (data: Investor[]) => {
             this.allInvestors = data; // Store the list of all investors
             console.log('Fetched all investors:', data);
@@ -64,7 +64,7 @@ export class HomeComponent {
         });
     
         // Fetch all startups for an admin
-        this.apiService.getAllStartups().subscribe({
+        this.apiService.getstartups().subscribe({
           next: (data: Startup[]) => {
             this.allStartups = data; // Store the list of all startups
             console.log('Fetched all startups:', data);

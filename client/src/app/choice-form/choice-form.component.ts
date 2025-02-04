@@ -10,6 +10,8 @@ import { ApiService } from '../services/api.service';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { Incubator } from '../incubator';
+import { PreSeed } from '../pre-seed';
 
 @Component({
   selector: 'app-choice-form',
@@ -27,33 +29,35 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./choice-form.component.css'],
 })
 export class ChoiceFormComponent implements OnInit {
-  type: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | null = null;
+  type: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'|'ROLE_INCUBATOR' | 'ROLE_PRE_SEED'| null = null;
   investorData: Investor = {};
   startupData: Startup = {};
-  // errorMessage: string | null = null;
+  incubatorData:Incubator={};
+  preSeedData:PreSeed={}
   userId: string | null = null;
   selectedFile: File[] = [];
 
-  // Add FormGroups for stepper
   investorFormGroup!: FormGroup;
   startupFormGroup!: FormGroup;
+  incubatorFormGroup!:FormGroup;
+  preSeedFormGroup!:FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
-    private fb: FormBuilder // FormBuilder for FormGroup initialization
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get('type') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER';
+    this.type = this.route.snapshot.paramMap.get('type') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'|'ROLE_INCUBATOR';
     this.userId = localStorage.getItem('userId');
 
-    // Initialize FormGroups
     this.investorFormGroup = this.fb.group({
       investorEmail: ['', [Validators.required, Validators.email]],
       investmentAmount: ['', [Validators.required, Validators.min(1)]],
       message: ['', Validators.maxLength(500)],
+      businessRegistrationNumber: ['', Validators.required],
     });
 
     this.startupFormGroup = this.fb.group({
@@ -67,6 +71,18 @@ export class ChoiceFormComponent implements OnInit {
       startupLogo:['', Validators.required],
       uploadBusinessRegistrationCertificate:['',Validators.required]
     });
+
+    this.incubatorFormGroup=this.fb.group({
+      email:['', Validators.required],
+      message:['', Validators.required]
+    })
+    this.preSeedFormGroup=this.fb.group({
+      email: ['', [Validators.required, Validators.email]], // Email field with validation
+      projectName: ['', Validators.required], // Project name field
+      discreption: ['', Validators.required], // Description field
+      problemSolve: ['', Validators.required], // Problem being solved field
+      
+    })
   }
 
   submitInvestor(): void {
@@ -75,7 +91,11 @@ export class ChoiceFormComponent implements OnInit {
       this.apiService.creatInvestor(this.investorData).subscribe({
         next: (response) => {
           console.log('Investor created successfully:', response);
-          this.router.navigate(['/home', this.type]);
+          if (response.status === 0) {
+            this.router.navigate(['/pending']);
+          } else {
+            this.router.navigate(['/home', this.type]);
+          }
         },
         error: (err) => {
           console.error('Error creating investor:', err);
@@ -92,9 +112,9 @@ export class ChoiceFormComponent implements OnInit {
     if (this.startupData) {
       this.startupData = {
         ...this.startupData,
-        startupLogo: this.selectedFile[0].name,
-        uploadGovernmentIssuedID: this.selectedFile[1].name,
-        uploadBusinessRegistrationCertificate: this.selectedFile[2].name,
+        startupLogo: this.selectedFile[0]?.name,
+        uploadGovernmentIssuedID: this.selectedFile[1]?.name,
+        uploadBusinessRegistrationCertificate: this.selectedFile[2]?.name,
       };
       this.startupData.userId = this.userId;
       this.apiService.creatStartup(this.startupData).subscribe({
@@ -108,10 +128,50 @@ export class ChoiceFormComponent implements OnInit {
             });
           }
           console.log('Startup created successfully:', response);
-          this.router.navigate(['/home', this.type]);
+          if (response.status === 0) {
+            this.router.navigate(['/pending']);
+          } else {
+            this.router.navigate(['/home', this.type]);
+          }
         },
         error: (err) => {
           console.error('Error creating startup:', err);
+        },
+      });
+    }
+  }
+  submitIncubator(): void {
+    if (this.incubatorData) {
+      this.incubatorData.userId = this.userId;
+      this.apiService.creatIncubator(this.incubatorData).subscribe({
+        next: (response) => {
+          console.log('incubator created successfully:', response);
+          if (response.status === 0) {
+            this.router.navigate(['/pending']);
+          } else {
+            this.router.navigate(['/home', this.type]);
+          }
+        },
+        error: (err) => {
+          console.error('Error creating investor:', err);
+        },
+      });
+    }
+  }
+  submitPreSeed(): void {
+    if (this.preSeedData) {
+      this.preSeedData.userId = this.userId; // Set the userId for the pre-seed investment
+      this.apiService.createPreSeed(this.preSeedData).subscribe({
+        next: (response) => {
+          console.log('Pre-seed created successfully:', response);
+          if (response.status === 0) {
+            this.router.navigate(['/pending']); // Navigate to pending if status is 0
+          } else {
+            this.router.navigate(['/home', this.type]); // Navigate to home with type
+          }
+        },
+        error: (err) => {
+          console.error('Error creating pre-seed:', err); // Log any errors
         },
       });
     }

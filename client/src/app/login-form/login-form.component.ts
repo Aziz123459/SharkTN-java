@@ -21,15 +21,15 @@ export class LoginFormComponent {
     login(): void {
       this.apiService.login(this.new).subscribe({
         next: (res) => {
-          console.log("from login : "+res.user.role );
+          console.log(res );
           
-          const userType = res.user.role 
+          const userType = res.role 
           localStorage.setItem("token", res.token)
-          localStorage.setItem("userId", res.user.id)
-          localStorage.setItem("role", res.user.role)
+          localStorage.setItem("userId", res.id)
+          localStorage.setItem("role", res.role)
           
           this.router.navigate(['/home',userType],{
-            state: { userType:userType } 
+            state: { userType:res } 
           });
           // this.router.navigate(["/"]);
         },

@@ -32,5 +32,10 @@ export class HomeNavbarComponent {
       }
     });
   }
+  async  logout():Promise<void>{
+
+    await localStorage.clear();
+    this.router.navigate(['/authenticate']);
+  }
 }
 

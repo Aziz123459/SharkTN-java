@@ -5,6 +5,8 @@ import { User } from '../user';
 import { Startup } from '../startup';
 import { Investor } from '../investor';
 import { Favorite } from '../favorite';
+import { Incubator } from '../incubator';
+import { PreSeed } from '../pre-seed';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +46,7 @@ export class ApiService {
   }
 
   getusers(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/user`)
+    return this.http.get(`${this.baseUrl}/admin/user/all`)
   }
 
   getuser(id: string | undefined): Observable<any>{
@@ -89,7 +91,44 @@ export class ApiService {
       catchError(this.handleError)
   )
   }
+  // *******************************
+  creatIncubator(data:Incubator): Observable<any>{
+    return this.http.post(`${this.baseUrl}/new/incubator`,data).pipe(  
+      catchError(this.handleError)
+  )
+  }
+  getIncubator(id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/incubator/${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+  getIncubators(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/all/incubators`).pipe(
+      catchError(this.handleError)
+    )
+  }
+  // *******************************
+   // Create a new pre-seed investment
+  createPreSeed(data: PreSeed): Observable<any> {
+    return this.http.post(`${this.baseUrl}/new/preseed`, data).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  // Get a specific pre-seed investment by ID
+  getPreSeed(id: string | undefined | null): Observable<any> {
+    return this.http.get(`${this.baseUrl}/preseed/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Get all pre-seed investments
+  getPreSeeds(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/all/preseeds`).pipe(
+      catchError(this.handleError)
+    );
+  }
+  // ***********************************************
   private handleError(err: any): Observable<any> {
     console.error('an error occurred!', err)
     return throwError(()=>err.error.errors)
@@ -115,7 +154,7 @@ export class ApiService {
       })
     );
   }
-  deleteUser(id:string | undefined |null ): Observable<any> {
+  delete(id:string | undefined |null ): Observable<any> {
     return this.http.delete(`${this.baseUrl}/user/${id}`);
   }
   
@@ -156,17 +195,17 @@ getInvestorByUserId(userId: string |null|undefined): Observable<Investor> {
 }
 
 // Delete user by ID
-delete(userId: string | null | undefined): Observable<any> {
-  return this.http.delete(`${this.baseUrl}/users/${userId}`);
+deleteUser(id: string): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/delete/${id}`, { responseType: 'json' });
 }
 
-deleteStartupById(id: string | null | undefined):Observable<any> {
-  return this.http.delete<Startup>(`${this.baseUrl}/startup/${id}`)
-}
+// deleteStartupById(id: string | null | undefined):Observable<any> {
+//   return this.http.delete<Startup>(`${this.baseUrl}/startup/${id}`)
+// }
 
-deleteInvestorById(id: string | null | undefined):Observable<any> {
-  return this.http.delete<Investor>(`${this.baseUrl}/investor/${id}`)
-}
+// deleteInvestorById(id: string | null | undefined):Observable<any> {
+//   return this.http.delete<Investor>(`${this.baseUrl}/investor/${id}`)
+// }
 
 
 
