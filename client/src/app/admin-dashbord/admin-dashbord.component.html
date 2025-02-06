@@ -20,7 +20,7 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>
-          <button (click)="deleteUser(user.id,user.role)" class="delete-button">Delete</button>
+          <button (click)="deleteUser(user.id)" class="delete-button">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -45,7 +45,7 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>
-          <button (click)="deleteUser(user.id,user.role)" class="delete-button">Delete</button>
+          <button (click)="deleteUser(user.id)" class="delete-button">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -53,8 +53,52 @@
 </div>
 
 <!-- If no users, show no data message -->
-<div *ngIf="startups.length === 0 && investors.length === 0">
-  <p>No users available.</p>
+<!-- Investor Table -->
+<div *ngIf="incubators.length > 0">
+  <h3 class="mt-4">Incubator</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of incubators">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="deleteUser(user.id)" class="delete-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="preseeds.length > 0">
+  <h3 class="mt-4">pre_Seed_Entrepreneur</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of preseeds">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="deleteUser(user.id)" class="delete-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 </div>

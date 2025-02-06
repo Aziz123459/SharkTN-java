@@ -6,10 +6,13 @@ import { User } from '../user';
 import { HomeNavbarComponent } from "../home-navbar/home-navbar.component";
 import { Investor } from '../investor';
 import { Startup } from '../startup';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Incubator } from '../incubator';
+import { PreSeed } from '../pre-seed';
 
 @Component({
   selector: 'app-admin-dashbord',
-  imports: [MatTableModule, CommonModule, HomeNavbarComponent],
+  imports: [MatTableModule, CommonModule, HomeNavbarComponent,RouterModule],
   templateUrl: './admin-dashbord.component.html',
   styleUrl: './admin-dashbord.component.css'
 })
@@ -17,9 +20,14 @@ export class AdminDashbordComponent {
   users: User[] = []; // All users
   startups: User[] = []; // Startups array
   investors: User[] = []; // Investors array
+  incubators: User[] = []; // Startups array
+  preseeds: User[] = [];
   investor:Investor={};
   startup:Startup={};
-  constructor(private apiService: ApiService) {}
+  incubator:Incubator={};
+  pressed:PreSeed={};
+  constructor(private apiService: ApiService, private route: ActivatedRoute,
+    private router: Router,) {}
 
   ngOnInit(): void {
     // Fetch users from the API
@@ -34,45 +42,43 @@ export class AdminDashbordComponent {
 
   filterUsersByType(): void {
     // Filter users by account type
-    this.startups = this.users.filter(user => user.role === 'startup');
-    this.investors = this.users.filter(user => user.role === 'investor');
+    this.startups = this.users.filter(user => user.role === 'ROLE_STARTUP_FOUNDER');
+    this.investors = this.users.filter(user => user.role === 'ROLE_INVESTOR');
+    this.incubators = this.users.filter(user => user.role === 'ROLE_INCUBATOR');
+    this.preseeds = this.users.filter(user => user.role === 'ROLE_PRE_SEED');
   }
 
-  deleteUser(userId: string |null|undefined,acctype:string|undefined): void {
-    // Call the delete function from the API service
-    console.log(userId,acctype)
-    if(acctype=='investor'){
-      this.apiService.getInvestorByUserId(userId).subscribe({
-        next: (data:Investor) => {
-          this.investor = data;
-          console.log(this.investor)
-          let investerid=this.investor.id
-          this.apiService.deleteInvestorById(investerid)
-        },
-        error: (err) => console.error('Error fetching users:', err),
-      });
-      }else if(acctype=='startup'){
-        this.apiService.getStartupByUserId(userId).subscribe({
-          next: (data:Startup) => {
-            this.startup = data;
-            console.log(this.startup)
-            let startupid=this.startup.id
-            this.apiService.deleteStartupById(startupid)
-          },
-          error: (err) => console.error('Error fetching users:', err),
-        });
-      }
+  deleteUser(userId: string | null | undefined): void {
+    if (!userId) {
+      console.error('User ID is missing.');
+      alert('User ID is required.');
+      return;
+    }
+  
+    if (confirm('Are you sure you want to delete this account?')) {
       this.apiService.deleteUser(userId).subscribe({
-        next: () => {
-          this.apiService.getusers().subscribe({
-            next: (data: User[]) => {
-              this.users = data;
-              this.filterUsersByType();
-            },
-            error: (err) => console.error('Error fetching users:', err),
-          });
+        next: (response) => {
+          const message = typeof response === 'string' ? response : response.message;
+          console.log('User deleted successfully:', message);
+          alert(message || 'Account deleted successfully.');
+  
+          // Clear user session and redirect
+          localStorage.clear();
+          this.router.navigate(['/login']);
         },
-        error: (err) => console.error('Error fetching users:', err),
+        error: (err) => {
+          console.error('Error deleting user:', err);
+  
+          if (err.status === 404) {
+            alert('User not found.');
+          } else if (err.status === 500) {
+            alert('Server error. Please try again later.');
+          } else {
+            alert(err.error?.message || 'Failed to delete account.');
+          }
+        },
       });
-  }
+    }
+      
+}
 }

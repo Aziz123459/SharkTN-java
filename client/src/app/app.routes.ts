@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { PendingComponent } from './pending/pending.component';
 
 
 
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path:"",component:LandingPageComponent},
     {path:"home/:type",component:HomeComponent},
     {path:"profile/:id",component:ProfileComponent},
+    {path:"pending",component:PendingComponent},
     // { path: '*', redirectTo: '/register', pathMatch: 'full' },
     { path: 'display/:type/:id', component: DisplayComponent },
     {path:'favorites' ,component:FavouriteComponent},

@@ -238,5 +238,116 @@
         </div>
       </form>
     </mat-step>
+
   </mat-horizontal-stepper>
 </div>
+  <div *ngIf="type === 'ROLE_INCUBATOR'" class="bgColor container pt-5 vh-100">
+    <mat-horizontal-stepper [linear]="true">
+      <!-- Step 1 -->
+      <mat-step>
+        <h2 class="mb-4 text-primary text-center">Investor Registration</h2>
+        <form [formGroup]="incubatorFormGroup">
+          <div class="mb-3">
+            <label for="email" class="form-label">Your Pro Email:</label>
+            <input
+              matInput
+              formControlName="email"
+              [(ngModel)]="incubatorData.email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Your Message:</label>
+            <input
+              matInput
+              formControlName="message"
+              [(ngModel)]="incubatorData.message"
+              name="message"
+              id="message"
+              class="form-control"
+              placeholder="Enter your message"
+            />
+          </div>
+          <div>
+            <button mat-raised-button color="primary" (click)="submitIncubator()">Submit</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+    <div *ngIf="type === 'ROLE_PRE_SEED'" class="bgColor container pt-5 vh-100">
+      <mat-horizontal-stepper [linear]="true">
+        <!-- Step 1 -->
+        <mat-step>
+          <h2 class="mb-4 text-primary text-center">Pre-Seed Registration - Step 1</h2>
+          <form [formGroup]="preSeedFormGroup">
+            <div class="mb-3">
+              <label for="email" class="form-label">Your Pro Email:</label>
+              <input
+                matInput
+                formControlName="email"
+                [(ngModel)]="preSeedData.email"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="projectName" class="form-label">Project Name:</label>
+              <input
+                matInput
+                formControlName="projectName"
+                [(ngModel)]="preSeedData.projectName"
+                name="projectName"
+                id="projectName"
+                class="form-control"
+                placeholder="Enter your project name"
+              />
+            </div>
+            <div>
+              <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+    
+        <!-- Step 2 -->
+        <mat-step>
+          <h2 class="mb-4 text-primary text-center">Pre-Seed Registration - Step 2</h2>
+          <form [formGroup]="preSeedFormGroup">
+            <div class="mb-3">
+              <label for="discription" class="form-label">Description:</label>
+              <textarea
+                matInput
+                formControlName="discription"
+                [(ngModel)]="preSeedData.discription"
+                name="discription"
+                id="discription"
+                class="form-control"
+                placeholder="Enter a brief description of your project"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="problemSolve" class="form-label">Problem Being Solved:</label>
+              <input
+                matInput
+                formControlName="problemSolve"
+                [(ngModel)]="preSeedData.problemSolve"
+                name="problemSolve"
+                id="problemSolve"
+                class="form-control"
+                placeholder="Describe the problem your project solves"
+              />
+            </div>
+            <div>
+              <button mat-raised-button color="primary" (click)="submitPreSeed()">Submit</button>
+              <button mat-button matStepperPrevious>Back</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+

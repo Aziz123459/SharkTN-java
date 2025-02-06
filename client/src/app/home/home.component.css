@@ -1,15 +1,69 @@
-.page{
-    background-color: #e2e8f0;    
-    padding: 25px;
+/* General Styles */
+body {
+  background-color: #f8f9fa; /* Light background for contrast */
+  font-family: 'Arial', sans-serif; /* Clean font */
 }
 
-.effect{
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-  }
+.page {
+  padding: 20px;
+}
 
+/* Card Styles */
+.card {
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
 
-  .effect:hover {
-    transform: scale(1.05);
-    cursor: pointer;
+.card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Header Styles */
+h1, h2, h3 {
+  color: #343a40; /* Darker text for better readability */
+  font-weight: bold; /* Bold text */
+}
+
+h1.display-4 {
+  font-size: 2.5rem; /* Larger font size for main headings */
+  margin-bottom: 20px; /* Spacing below */
+}
+
+h2.display-4 {
+  font-size: 2rem; /* Slightly smaller for subheadings */
+  margin-bottom: 15px; /* Spacing below */
+}
+
+h3 {
+  font-size: 1.5rem; /* Medium size for section headings */
+  margin-bottom: 10px; /* Spacing below */
+}
+
+/* Text Styles */
+p {
+  color: #495057; /* Darker text for better readability */
+}
+
+/* Button Styles */
+.btn {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .col-md-6 {
+      flex: 0 0 100%; /* Full width on smaller screens */
+      max-width: 100%; /* Full width on smaller screens */
   }
+}
