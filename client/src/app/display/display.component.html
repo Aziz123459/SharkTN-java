@@ -69,5 +69,45 @@
       </div>
     </div>
   </div>
+  <!-- Incubator Details for Pre-Seed Startups -->
+<div *ngIf="role === 'ROLE_PRE_SEED' && incubatorData.id" class="card shadow-sm mb-4">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="card-title">Incubator Details</h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Email:</strong> {{ incubatorData.email }}</p>
+    <p><strong>Message:</strong> {{ incubatorData.message }}</p>
+    <div class="p-2 text-end">        
+      <button (click)="sendEmail(incubatorData.email)"  class="btn btn-primary btn-sm">
+        Contact By Email
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Pre-Seed Details for Incubators -->
+<div *ngIf="role === 'ROLE_INCUBATOR' && preSeedData.id" class="card shadow-sm mb-4">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="card-title">Pre-Seed Startup Details</h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Project Name:</strong> {{ preSeedData.projectName }}</p>
+    <p><strong>Email:</strong> {{ preSeedData.email }}</p>
+    <p><strong>Description:</strong> {{ preSeedData.discription }}</p>
+    <p><strong>Problem Solved:</strong> {{ preSeedData.problemSolve }}</p>
+    <div class="p-2 text-end">        
+      <button (click)="sendEmail(preSeedData.email)"  class="btn btn-primary btn-sm">
+        Contact By Email
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 </div>
 </div>

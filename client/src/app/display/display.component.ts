@@ -6,6 +6,8 @@ import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Favorite } from '../favorite';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
+import { Incubator } from '../incubator';
+import { PreSeed } from '../pre-seed';
 
 @Component({
   selector: 'app-display',
@@ -14,15 +16,16 @@ import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
   styleUrl: './display.component.css'
 })
 export class DisplayComponent {
-role: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN' |undefined;
+role: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN' |'ROLE_INCUBATOR'|'ROLE_PRE_SEED'|undefined;
   id: string | undefined |null;
   investorData: Investor = {} as Investor;
   startupData: Startup = {} as Startup;
-  
+  incubatorData: Incubator = {} as Incubator;
+  preSeedData: PreSeed = {} as PreSeed;
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN';
+    this.role = localStorage.getItem('role') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN'|'ROLE_INCUBATOR'|'ROLE_PRE_SEED';
     console.log(this.role);
 
     
@@ -47,19 +50,32 @@ role: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN' |undefined;
         next: (data: Startup) => (this.startupData = data),
         error: (err) => console.error('Error fetching startup details:', err)
       });
+    }if (this.role === 'ROLE_INCUBATOR' || this.role === 'ROLE_ADMIN') {
+      // Fetch investor details for a startup user
+      this.apiService.getPreSeed(this.id).subscribe({
+        next: (data: PreSeed) => (this.preSeedData = data),
+        error: (err) => console.error('Error fetching pre seed details:', err)
+      });
+    }if (this.role === 'ROLE_PRE_SEED' || this.role === 'ROLE_ADMIN') {
+      // Fetch investor details for a startup user
+      this.apiService.getIncubator(this.id).subscribe({
+        next: (data: Incubator) => (this.incubatorData= data),
+        error: (err) => console.error('Error fetching incubator details:', err)
+      });
     }
   }
   
   
-  sendEmail(): void {
-    console.log('role:', this.role);
-    const email =
-      this.role === 'ROLE_STARTUP_FOUNDER'
-        ? this.investorData.investorEmail
-        : this.startupData.startupEmail ;
-        console.log('Email:', email);
-        
+  sendEmail(email?: string): void {
+    if (!email) {
+      console.warn('Email is missing or invalid.');
+      return;
+    }
+    
+    console.log('Sending email to:', email);
     window.location.href = `mailto:${email}`;
   }
+  
+  
   
 }

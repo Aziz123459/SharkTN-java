@@ -7,6 +7,8 @@ import { HomeNavbarComponent } from "../home-navbar/home-navbar.component";
 import { Investor } from '../investor';
 import { Startup } from '../startup';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Incubator } from '../incubator';
+import { PreSeed } from '../pre-seed';
 
 @Component({
   selector: 'app-admin-dashbord',
@@ -18,9 +20,12 @@ export class AdminDashbordComponent {
   users: User[] = []; // All users
   startups: User[] = []; // Startups array
   investors: User[] = []; // Investors array
+  incubators: User[] = []; // Startups array
+  preseeds: User[] = [];
   investor:Investor={};
   startup:Startup={};
-  
+  incubator:Incubator={};
+  pressed:PreSeed={};
   constructor(private apiService: ApiService, private route: ActivatedRoute,
     private router: Router,) {}
 
@@ -39,6 +44,8 @@ export class AdminDashbordComponent {
     // Filter users by account type
     this.startups = this.users.filter(user => user.role === 'ROLE_STARTUP_FOUNDER');
     this.investors = this.users.filter(user => user.role === 'ROLE_INVESTOR');
+    this.incubators = this.users.filter(user => user.role === 'ROLE_INCUBATOR');
+    this.preseeds = this.users.filter(user => user.role === 'ROLE_PRE_SEED');
   }
 
   deleteUser(userId: string | null | undefined): void {

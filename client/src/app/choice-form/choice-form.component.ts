@@ -33,7 +33,7 @@ export class ChoiceFormComponent implements OnInit {
   investorData: Investor = {};
   startupData: Startup = {};
   incubatorData:Incubator={};
-  preSeedData:PreSeed={}
+  preSeedData:PreSeed={};
   userId: string | null = null;
   selectedFile: File[] = [];
 
@@ -50,7 +50,7 @@ export class ChoiceFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get('type') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'|'ROLE_INCUBATOR';
+    this.type = this.route.snapshot.paramMap.get('type') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'|'ROLE_INCUBATOR'| 'ROLE_PRE_SEED';
     this.userId = localStorage.getItem('userId');
 
     this.investorFormGroup = this.fb.group({
@@ -79,7 +79,7 @@ export class ChoiceFormComponent implements OnInit {
     this.preSeedFormGroup=this.fb.group({
       email: ['', [Validators.required, Validators.email]], // Email field with validation
       projectName: ['', Validators.required], // Project name field
-      discreption: ['', Validators.required], // Description field
+      discription: ['', Validators.required], // Description field
       problemSolve: ['', Validators.required], // Problem being solved field
       
     })
