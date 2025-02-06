@@ -2,12 +2,9 @@ package com.demo.project.controllers;
 
 import java.util.List;
 
+import com.demo.project.models.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.demo.project.DTOS.UserDTO;
 import com.demo.project.models.Role;

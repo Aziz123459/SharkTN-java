@@ -1,9 +1,6 @@
 package com.demo.project.services;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -64,6 +61,34 @@ public class UserService {
         return userRepository.findByRole(role).stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getUserById(Long id) {
+        return userRepository.findById(id).stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+
+    public UserDTO updateUser(Long id, User user){
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()){
+            User oldUser = optionalUser.get();
+            if (user.getFullname() != null){
+                oldUser.setFullname(user.getFullname());
+            }
+            if (user.getPhone() != null){
+                oldUser.setPhone(user.getPhone());
+            }
+            if (user.getAdress() != null){
+                oldUser.setAdress(user.getAdress());
+            }
+            // finish all the entities in the model
+            return convertEntityToDto(userRepository.save(oldUser));
+
+        }else {
+            return null;
+        }
     }
     
     /**
