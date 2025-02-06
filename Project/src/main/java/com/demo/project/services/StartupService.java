@@ -50,12 +50,27 @@ public class StartupService {
             if (startup.getStartupName() != null){
             	oldStartup.setStartupName(startup.getStartupName());
             }
+            if (startup.getTeamNumber() > 0){
+            	oldStartup.setTeamNumber(startup.getTeamNumber());
+            }
+            if (startup.getIndustry() != null){
+            	oldStartup.setIndustry(startup.getIndustry());
+            }
+            if (startup.getBriefDescription() != null){
+            	oldStartup.setBriefDescription(startup.getBriefDescription());
+            }
             // finish all the entities in the model
             return convertEntityToDto(startupRepo.save(oldStartup));
 
         }else {
             return null;
         }
+    }
+	
+	public StartupDTO getStartupByUserId(Long id) {
+        return startupRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Startup not found"));
     }
 	
     public StartupDTO convertEntityToDto(Startup startup) {
@@ -66,6 +81,7 @@ public class StartupService {
     public Startup convertDtoToEntity(StartupDTO startupDTO) {
         return modelMapper.map(startupDTO, Startup.class);
     }
+    
 	
 //	// add to favorites
 //	public void addToFavorites(Long userId,Long startupId) {

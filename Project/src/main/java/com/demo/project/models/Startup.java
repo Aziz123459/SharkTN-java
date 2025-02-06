@@ -56,6 +56,7 @@ public class Startup {
 	
 	
 	@NotEmpty(message="Description is required")
+	@Column(name = "briefDescription", length = 222222222)
 	private String briefDescription;
 	
 	@NotEmpty(message="Government IssuedID is required")

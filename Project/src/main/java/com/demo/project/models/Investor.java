@@ -36,6 +36,7 @@ public class Investor {
 	private int investmentAmount;
 	
 	@NotEmpty(message="Investment Amount is required")
+	@Column(name = "message", length = 222222222)
 	private String message;
 	
 	@Email

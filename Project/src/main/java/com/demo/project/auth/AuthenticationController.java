@@ -26,6 +26,7 @@ public ResponseEntity<AuthenticationResponse> register(
 public ResponseEntity<AuthenticationResponse> authenticate(
 		@RequestBody AuthenticationRequest request
 		){
+	System.out.println("request : " +request);
 	return ResponseEntity.ok(service.authenticate(request));
 }
 

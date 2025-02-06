@@ -25,12 +25,18 @@ export class HomeNavbarComponent {
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
         localStorage.removeItem('role');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/authenticate']);
       },
       error: (err) => {
         console.error('Error during logout:', err);
       }
     });
+  }
+
+  async  logout():Promise<void>{
+
+    await localStorage.clear();
+    this.router.navigate(['/authenticate']);
   }
 }
 

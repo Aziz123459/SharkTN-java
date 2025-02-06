@@ -9,6 +9,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.demo.project.DTOS.InvestorDTO;
+import com.demo.project.DTOS.StartupDTO;
 import com.demo.project.models.Investor;
 import com.demo.project.repositories.InvestorRepository;
 import com.demo.project.repositories.UserRepository;
@@ -49,6 +50,9 @@ public class InvestorService {
         Optional<Investor> optionalInvestor = investorRepo.findById(id);
         if (optionalInvestor.isPresent()){
         	Investor oldInvestor = optionalInvestor.get();
+        	if (investor.getInvestmentAmount() >0){
+            	oldInvestor.setInvestmentAmount(investor.getInvestmentAmount());
+            }
             if (investor.getMessage() != null){
             	oldInvestor.setMessage(investor.getMessage());
             }
@@ -58,6 +62,12 @@ public class InvestorService {
         }else {
             return null;
         }
+    }
+	
+	public InvestorDTO getInvestorByUserId(Long id) {
+        return investorRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Investor not found"));
     }
 	
     public InvestorDTO convertEntityToDto(Investor investor) {

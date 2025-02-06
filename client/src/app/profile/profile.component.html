@@ -1,7 +1,6 @@
 <app-home-navbar></app-home-navbar>
 <div class="page">
 <div class="container mt-5 pt-5">
-  <h1>My Profile</h1>
   <div class="main-body">
         <div class="row gutters-sm">
           <div class="col-md-4 mb-3">
@@ -11,11 +10,12 @@
                   <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                   <div class="mt-3">
                     <h4>{{user.fullname}}</h4>
-                    <p class="text-secondary mb-1">{{user.birth}}</p>
+                    <p class="text-secondary mb-1">Age : {{calculateAge(user.birth)}}</p>
                     <p class="text-muted font-size-sm">{{user.email}}</p>
                     <!-- <button class="btn btn-primary">Follow</button> -->
-                    <a routerLink="/edit/profile" class="btn btn-info">Edit</a>
-
+                    <a routerLink="/edit/profile" class="btn-edit">
+                      <i class="fas fa-edit"></i> Edit
+                  </a>
                   </div>
                 </div>
               </div>
@@ -45,7 +45,7 @@
               </ul>
               <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="text-center p-3">
                 <h4 class="pt-3 pb-4">Startup Logo</h4>
-                <img src="http://localhost:5000/uploads/{{dataStartup.startupLogo}}" alt="Logo" height="250px" width="250px" style="border-radius: 50%;">
+                <img src="{{dataStartup.startupLogo}}" alt="Logo" height="250px" width="250px" style="border-radius: 50%;">
               </div>
             </div>
           </div>

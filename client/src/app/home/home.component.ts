@@ -97,7 +97,12 @@ export class HomeComponent {
   }
   
   
-
+  truncateText(text: string | undefined, limit: number = 40): string {
+    if (!text) return ''; // Retourne une chaîne vide si le texte est undefined
+    return text.length > limit ? text.substring(0, limit) + '...' : text;
+  }
+  
+  
   
 
   

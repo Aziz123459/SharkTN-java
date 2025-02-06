@@ -1,0 +1,12 @@
+<div class="upload-container">
+    <input type="file" (change)="onFileSelected($event)">
+    <button (click)="onUpload()" [disabled]="isUploading">
+      {{ isUploading ? 'Uploading...' : 'Upload' }}
+    </button>
+  
+    <div *ngIf="imageUrl">
+      <h3>Uploaded Image:</h3>
+      <img [src]="imageUrl" alt="Uploaded Image" width="300">
+    </div>
+  </div>
+  

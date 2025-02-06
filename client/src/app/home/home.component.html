@@ -31,7 +31,7 @@
       <div *ngFor="let startup of allStartups" >
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
           <div class="card-header text-center">
-            <img *ngIf="type === 'ROLE_ADMIN'" src="http://localhost:5000/uploads/{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+            <img *ngIf="type === 'ROLE_ADMIN'" src="{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
           </div>
           <div class="card-body">
             <p><strong>Name:</strong> {{ startup.startupName }}</p>
@@ -49,12 +49,13 @@
 
   <!-- Investor or Startup for Non-Admin -->
   <div *ngIf="type === 'ROLE_INVESTOR'" class="mt-4">
-      <h1 >All Startups</h1>
-    <div *ngIf="item.length > 0; else noData" class="row">
-      <div *ngFor="let entry of item"  class="">
-        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry.id)">
+    <h1>All Startups</h1>
+    <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
+      <div *ngFor="let entry of item" class="col-6 mb-4">    
+        <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
           <div class="card-header">
-            <img *ngIf="isStartup(entry)" src="http://localhost:5000/uploads/{{entry.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+            <img *ngIf="isStartup(entry)" [src]="entry.startupLogo" alt="Logo" 
+                 height="80px" width="80px" style="border-radius: 50%;">
           </div>
           <div class="card-body">
             <ng-container *ngIf="isStartup(entry)">
@@ -62,28 +63,30 @@
               <p><strong>Industry:</strong> {{ entry.industry }}</p>
               <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
               <p><strong>Startup Email:</strong> {{ entry.startupEmail }}</p>
-              <p><strong>Description:</strong> {{ entry.briefDescription }}</p>
+              <p><strong>Description:</strong> {{ truncateText(entry.briefDescription ?? '', 130) }}</p>
             </ng-container>
           </div>
         </div>
       </div>
     </div>
+  
     <ng-template #noData>
       <p>No startups available.</p>
     </ng-template>
   </div>
+  
 
   <div *ngIf="type === 'ROLE_STARTUP_FOUNDER'" class="mt-4">
     <h2>All Investors</h2>
-    <div *ngIf="item.length > 0; else noData" class="row">
-      <div *ngFor="let entry of item">
-        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry.id)">
+    <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
+      <div *ngFor="let entry of item" class="col-6 mb-4">
+        <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
           <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->
           <div class="card-body">
             <ng-container *ngIf="isInvestor(entry)">
               <p><strong>Investor Email:</strong> {{ entry.investorEmail }}</p>
               <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }} $</p>
-              <p><strong>Message:</strong> {{ entry.message }}</p>
+              <p><strong>Message:</strong> {{ truncateText(entry.message ?? '', 130) }}</p>
             </ng-container>
           </div>
         </div>

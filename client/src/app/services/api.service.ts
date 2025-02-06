@@ -73,19 +73,22 @@ export class ApiService {
   )
   }
   login(data:User): Observable<any>{
+    console.log("from login service : ");
+    console.log( data);
+    
     return this.http.post(`${this.baseUrl}/auth/authenticate`,data).pipe(  
       catchError(this.handleloginerror)
   )
   }
 
   creatStartup(data:Startup): Observable<any>{
-    return this.http.post(`${this.baseUrl}/new/startup`,data).pipe(  
+    return this.http.post(`${this.baseUrl}/startup/new`,data).pipe(  
       catchError(this.handleError)
   )
   }
 
   creatInvestor(data:Investor): Observable<any>{
-    return this.http.post(`${this.baseUrl}/new/investor`,data).pipe(  
+    return this.http.post(`${this.baseUrl}/investor/new`,data).pipe(  
       catchError(this.handleError)
   )
   }
@@ -142,7 +145,8 @@ updateInvestor(data : Investor): Observable<any> {
   )
 }
 updateStartup(data : Startup): Observable<any> {
-  return this.http.patch(`${this.baseUrl}/startup/${data.id}`,data).pipe(  
+  console.log("data from service : "+ data.briefDescription)
+  return this.http.put(`${this.baseUrl}/startup/${data.id}`,data).pipe(  
     catchError(this.handleError)
   )
 }
