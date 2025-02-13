@@ -66,11 +66,7 @@ public IncubatorDTO convertEntityToDto(Incubator incubator) {
     return modelMapper.map(incubator, IncubatorDTO.class);
 }
 
-    public IncubatorDTO getIncubatorByUserId(Long id) {
-        return incubatorRepo.findByUserId(id)
-                .map(this::convertEntityToDto)
-                .orElseThrow(() -> new RuntimeException("Investor not found"));
-    }
+
     public Incubator getIncubatorById(Long id){
         return incubatorRepo.findById(id).get();
     }
