@@ -2,6 +2,7 @@ package com.demo.project.controllers;
 
 import java.util.List;
 
+import com.demo.project.DTOS.PreSeedDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,12 +56,17 @@ public List<IncubatorDTO> getAllIncubatorsDTO(){
         throw new RuntimeException("Authorization header is missing or invalid");
     }
 
-@GetMapping("/incubator/{id}")
-public IncubatorDTO getOneInCubator(@PathVariable("id") Long id){
-    return incubatorService.getIncubatorByIdDTO(id);
-}
-@PutMapping("incubator/edit/{id}")
-public IncubatorDTO updateIncubator(@PathVariable("id") Long id, @RequestBody Incubator incubator){
-    return incubatorService.updateIncubator(id, incubator);
-}
+    @GetMapping("/incubator/{id}")
+    public IncubatorDTO getOneInCubator(@PathVariable("id") Long id){
+        return incubatorService.getIncubatorByIdDTO(id);
+    }
+    @PutMapping("incubator/edit/{id}")
+    public IncubatorDTO updateIncubator(@PathVariable("id") Long id, @RequestBody Incubator incubator){
+        return incubatorService.updateIncubator(id, incubator);
+    }
+
+    @GetMapping("/incubator/user/{id}")
+    public IncubatorDTO getIncubatorByUserId(@PathVariable("id") Long id) {
+        return incubatorService.getIncubatorByUserId(id);
+    }
 }

@@ -12,10 +12,14 @@ import { User } from '../user';
 import { PreSeed } from '../pre-seed';
 import { Incubator } from '../incubator';
 import { FormsModule } from '@angular/forms';
+import { PendingComponent } from '../pending/pending.component';
+import { DeniedComponent } from '../denied/denied.component';
+import { InvestorWithUser } from '../investor-with-user';
+
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule, LoggedInFooterComponent,FormsModule],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule, LoggedInFooterComponent,FormsModule, PendingComponent, DeniedComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,6 +27,7 @@ export class HomeComponent {
   type: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'| 'ROLE_ADMIN'|'ROLE_INCUBATOR'|'ROLE_PRE_SEED'| null = null; 
   item: (Investor | Startup)[] = []; 
   start:(Startup)[]=[];
+  itemsInvestors: InvestorWithUser[]=[]
   item2:( PreSeed)[]=[];
   item3:(Incubator)[]=[]
   investorData: Investor = {};
@@ -32,11 +37,14 @@ export class HomeComponent {
   incubatorData: Incubator = {}; 
   preSeedData: PreSeed = {}; 
   user: User = {};
+  investorsWithUser: InvestorWithUser[] = [];
   allInvestors: Investor[] = [];
   allStartups: Startup[] = [];
   allIncubators: Incubator[] = []; 
   allPreSeeds: PreSeed[] = []; 
   search:String=""
+  id: string | undefined |null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,17 +55,23 @@ export class HomeComponent {
   ngOnInit(): void {
     
     this.type = this.route.snapshot.paramMap.get('type') as 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'|'ROLE_INCUBATOR'|'ROLE_PRE_SEED';
-
+    this.id = localStorage.getItem('userId')
     
     this.getall();
   }
 
   getall(): void {
     if (this.type === 'ROLE_STARTUP_FOUNDER') {
-      this.apiService.getinvestors().subscribe({
-        next: (data: Investor[]) => (this.item = data),
+      this.apiService.getinvestorswithusers().subscribe({
+        next: (data: InvestorWithUser[]) => {(this.itemsInvestors = data),console.log("item", this.itemsInvestors);
+        },
         error: (err) => console.error('Error fetching investors:', err),
         complete: () => console.info('Fetched all investors')
+      });
+      this.apiService.getstartupByUserId(this.id).subscribe({
+        next: (Data: Startup) => {(this.startupData = Data),console.log("startup data : ", this.startupData);
+        },
+        error: (err) => console.error('Error fetching user:', err)
       });
     } else if (this.type === 'ROLE_INVESTOR') {
       this.apiService.getstartups().subscribe({
@@ -93,7 +107,7 @@ export class HomeComponent {
         error: (err) => console.error('Error fetching all investors:', err)
       });
 
-      this.apiService.getstartups().subscribe({
+      this.apiService.getstartupswithusers().subscribe({
         next: (data: Startup[]) => {
           this.allStartups = data; 
           console.log('Fetched all startups:', data);
@@ -162,7 +176,7 @@ export class HomeComponent {
   
 
   
-  isInvestor(entry: any): entry is Investor {
+  isInvestor(entry: any): entry is InvestorWithUser {
     return this.type === 'ROLE_STARTUP_FOUNDER';
   }
 

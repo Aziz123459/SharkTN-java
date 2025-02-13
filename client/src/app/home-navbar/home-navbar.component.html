@@ -1,8 +1,7 @@
-
 <mat-toolbar class="navbar">
     <div class="container">
     <div class="logo">
-        <img src="assests/logo.png" alt="Logo"  />
+        <img src="assests/logo.png" alt="Logo" />
       </div>
     
       <nav class="nav-links">
@@ -14,7 +13,9 @@
          <a mat-button *ngIf="type === 'ROLE_INVESTOR'" routerLink="/booking/investor">Bookings Request</a>
          <a mat-button *ngIf="type === 'ROLE_INCUBATOR'" routerLink="/booking/incubator">Bookings Request</a>
          <a mat-button *ngIf="type === 'ROLE_PRE_SEED'" routerLink="/booking/preseed">Bookings Request</a>
-        <button mat-button *ngIf="type === 'ROLE_ADMIN'" routerLink="/admin-dashboard" class="auth-button">Admin</button>
+        <button mat-button *ngIf="type === 'ROLE_ADMIN'" routerLink="/admin-dashboard" class="auth-button">Dashboard</button>
+        <button mat-button *ngIf="type === 'ROLE_ADMIN'" routerLink="/admin-requests" class="auth-button">Requests</button>
+
         <button mat-button (click)="logout()" class="auth-button">Logout</button>
       </nav>
     </div>

@@ -19,7 +19,28 @@ html body .thank-you-wrapper .container > .row{display: table-cell; height: 100%
 .thank-you-wrapper ul.footer-nav li + li::before{ background: rgba(0, 0, 0, 0.3);}
 .thank-you-copy p{margin: 0; padding: 0; font-size: 12px;}
 .thank-you-page-content h1{position: relative; width: 100%; float: left; margin-bottom: 45px; padding-top: 110px; font-size: 30px; font-weight: 200; line-height: 40px;}
-.thank-you-page-content h1::before { content: "\f00c"; top: 0; transform: translateX(-50%); -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%); left: 50%; position: absolute; font-family: "FontAwesome"; font-size:60px; text-align: center; float: left; width: 100px; color: green; height: 100px; text-align: center; line-height: 100px; border: 2px solid green;  border-radius:100%;  -webkit-border-radius:100%; -ms-border-radius:100%;}
+.thank-you-page-content h1::before { 
+    content: "\f00d"; /* Code FontAwesome pour une croix */
+    top: 0; 
+    transform: translateX(-50%); 
+    -webkit-transform: translateX(-50%); 
+    -ms-transform: translateX(-50%); 
+    left: 50%; 
+    position: absolute; 
+    font-family: "FontAwesome"; 
+    font-size: 60px; 
+    text-align: center; 
+    float: left; 
+    width: 100px; 
+    color: red; /* Couleur rouge pour la croix */
+    height: 100px; 
+    text-align: center; 
+    line-height: 100px; 
+    border: 2px solid red;  /* Bordure rouge */
+    border-radius: 100%;  
+    -webkit-border-radius: 100%; 
+    -ms-border-radius: 100%;
+}
 .thank-you-page-content .btn{padding-top:13px; padding-bottom:13px; padding-right: 25px;}
 ul.footer-nav{text-align: right;}
 ul.footer-nav li{display: inline-block; position: relative;}

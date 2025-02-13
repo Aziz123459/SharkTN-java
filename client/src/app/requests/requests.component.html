@@ -1,0 +1,70 @@
+<app-home-navbar></app-home-navbar>
+
+<div class="container mt-5 pt-5">
+  <div class="content mt-5">
+    <!-- Left Section: User & Startup Information -->
+    <div class="info-section">
+      <h2>User Information</h2>
+      <p><strong>Full Name:</strong> {{ user.fullname }}</p>
+      <p><strong>Address:</strong> {{ user.adress }}</p>
+      <p><strong>Age:</strong> {{ calculateAge(user.birth) }}</p>
+      <p><strong>Phone:</strong> {{ user.phone }}</p>
+      <p><strong>Role:</strong> {{ user.role }}</p>
+
+      <h2>Startup Information</h2>
+      <p><strong>Startup Name:</strong> {{ startup.startupName }}</p>
+      <p><strong>Industry:</strong> {{ startup.industry }}</p>
+      <p><strong>Email:</strong> {{ startup.startupEmail }}</p>
+      <p><strong>Team Members:</strong> {{ startup.teamNumber }}</p>
+      <p><strong>Brief Description:</strong> {{ startup.briefDescription }}</p>
+    </div>
+
+    <!-- Right Section: Uploaded Documents & Actions -->
+    <div class="documents-section">
+      <h2>Uploaded Documents</h2>
+
+      <p><strong>Startup Logo:</strong></p>
+      <img [src]="startup.startupLogo" alt="Startup Logo" width="200">
+
+      <p><strong>Government Issued ID:</strong></p>
+      <img 
+        [src]="startup.uploadGovernmentIssuedID" 
+        alt="Government Issued ID" 
+        width="200" 
+        class="clickable-image"
+        (click)="openImageModal(startup.uploadGovernmentIssuedID!, 'Government Issued ID')"
+      >
+
+      <p><strong>Business Registration Certificate:</strong></p>
+      <img 
+        [src]="startup.uploadBusinessRegistrationCertificate" 
+        alt="Business Registration Certificate" 
+        width="200" 
+        class="clickable-image"
+        (click)="openImageModal(startup.uploadBusinessRegistrationCertificate!, 'Business Registration Certificate')"
+      >
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button (click)="acceptStartup()">Accept</button>
+        <button  (click)="denyStartup()">Deny</button>
+        <button routerLink="/admin-requests">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedTitle }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img [src]="selectedImage" class="img-fluid enlarged-image" alt="Large View">
+      </div>
+    </div>
+  </div>
+</div>

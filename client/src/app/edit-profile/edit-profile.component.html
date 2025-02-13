@@ -2,12 +2,12 @@
 <div class="container pt-5 mt-5">
     <div class="main-body pt-4 pb-4">
         <div class="row">
-            <div class="col-lg-4">
+            <div *ngIf="dataStartup.status!=2" class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img *ngIf="role === 'ROLE_STARTUP_FOUNDER'" src="{{dataStartup.startupLogo}}" alt="" alt="Admin" class="rounded-circle p-1" width="110">
-                            <img *ngIf="role === 'ROLE_INVESTOR'" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <img *ngIf="role === 'ROLE_INVESTOR' || role === 'ROLE_PRE_SEED'" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                         </div>
                         <hr class="my-4">
                         <ul class="list-group list-group-flush">
@@ -42,7 +42,7 @@
                         <h1 class="pb-2 pt-4">Edit My Profile</h1>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-3">
+                        <div class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Full Name</h6>
                             </div>
@@ -50,7 +50,7 @@
                                 <input name="fullname" role="text" class="form-control" [(ngModel)]="user.fullname">
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Phone</h6>
                             </div>
@@ -58,7 +58,7 @@
                                 <input name="phone" role="number" class="form-control" [(ngModel)]="user.phone">
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Address</h6>
                             </div>
@@ -66,7 +66,7 @@
                                 <input name="adress" role="text" class="form-control" [(ngModel)]="user.adress">
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Startup Name</h6>
                             </div>
@@ -74,7 +74,7 @@
                                 <input name="startupName" role="text" class="form-control" [(ngModel)]="dataStartup.startupName">
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Team Number</h6>
                             </div>
@@ -82,7 +82,7 @@
                                 <input name="teamNumber" role="number" class="form-control" [(ngModel)]="dataStartup.teamNumber">
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Industry</h6>
                             </div>
@@ -90,7 +90,15 @@
                                 <input name="Industry" role="text" class="form-control" [(ngModel)]="dataStartup.industry">
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER' && dataStartup.status==2" class="row mb-3 d-flex align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0 bluetitles">Business Registration Number</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input name="businessRegistrationNumber" role="text" class="form-control" [(ngModel)]="dataStartup.businessRegistrationNumber">
+                            </div>
+                        </div>
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="row mb-3 d-flex">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Description</h6>
                             </div>
@@ -98,7 +106,55 @@
                                 <textarea style="height: 150px;" [(ngModel)]="dataStartup.briefDescription" class="form-control" name="briefDescription" id=""></textarea>
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_INVESTOR'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER' && dataStartup.status==2" class="row mb-3 d-flex align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0 bluetitles">Government Issued ID</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <img 
+                                    name="uploadGovernmentIssuedID" 
+                                    src="{{dataStartup.uploadGovernmentIssuedID}}" 
+                                    height="200"
+                                >
+                            </div>
+                            <div class="mt-3">
+                                <input
+                                    type="file"
+                                    id="UploadGovernmentIssuedID"
+                                    [(ngModel)]="dataStartup.uploadGovernmentIssuedID"
+                                    name="uploadGovernmentIssuedID"
+                                    class="form-control"
+                                    (change)="onFileSelected($event, 0)"
+                                />
+                                <small class="form-text text-muted">
+                                    {{ selectedFile[0]?.name || 'No file selected' }}
+                                </small>
+                            </div>
+                        </div>
+                        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER' && dataStartup.status==2" class="row mb-3 d-flex align-items-center">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0 bluetitles">Business Registration Certificate</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <img name="uploadBusinessRegistrationCertificate" src="{{dataStartup.uploadBusinessRegistrationCertificate}}" width="300">
+                            </div>
+                            <div class="mt-3">
+                                <input
+                                    type="file"
+                                    id="uploadBusinessRegistrationCertificate"
+                                    [(ngModel)]="dataStartup.uploadBusinessRegistrationCertificate"
+                                    name="uploadBusinessRegistrationCertificate"
+                                    class="form-control"
+                                    (change)="onFileSelected($event, 1)"
+                                />
+                                <small class="form-text text-muted">
+                                    {{ selectedFile[1]?.name || 'No file selected' }}
+                                </small>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="role === 'ROLE_INVESTOR'" class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Investment Amount</h6>
                             </div>
@@ -106,13 +162,24 @@
                                 <input name="investmentAmount" role="text" class="form-control" [(ngModel)]="dataInvestor.investmentAmount">
                             </div>
                         </div>
-                        <div *ngIf="role === 'ROLE_INVESTOR'" class="row mb-3">
+                        <div *ngIf="role === 'ROLE_INVESTOR'" class="row mb-3 d-flex align-items-center">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 bluetitles">Investor Message</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 <textarea style="height: 150px;" [(ngModel)]="dataInvestor.message" class="form-control" name="briefDescription" id=""></textarea>
                                 <!-- <input name="BriefDescription" role="text" class="form-control" [(ngModel)]="dataInvestor.message"> -->
+                            </div>
+                        </div>
+                        <div *ngIf="role === 'ROLE_PRE_SEED'">
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 bluetitles">Project Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <!-- <textarea style="height: 150px;" [(ngModel)]="dataPreSeed.projectName" class="form-control" name="projectName" id=""></textarea> -->
+                                    <input name="projectName" type="text" class="form-control" [(ngModel)]="dataPreSeed.projectName">
+                                </div>
                             </div>
                         </div>
                         <div class="row">

@@ -6,6 +6,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 import { Investor } from '../investor';
+import { PreSeed } from '../pre-seed';
+import { Incubator } from '../incubator';
 
 
 @Component({
@@ -19,6 +21,8 @@ export class ProfileComponent {
   user : User ={}
   dataStartup : Startup ={}
   dataInvestor : Investor ={}
+  dataPreSeed : PreSeed={}
+  dataIncubator : Incubator={}
   userId: string | null = null;
 
 
@@ -27,10 +31,8 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.role= localStorage.getItem('role');
     this.userId= localStorage.getItem('userId');
-    console.log("userId : "+ this.userId);
-    console.log("role : "+this.role);
     
-    if (this.userId) {
+      if (this.userId) {
       this.apiService.getuser(this.userId).subscribe({
         next: (data) => {this.user = data[0],console.log(data );
         },
@@ -49,6 +51,20 @@ export class ProfileComponent {
           next: (data) => {this.dataInvestor = data; console.log(data);
           },
           error: err => console.error("Error fetching investor:", err)
+        })
+      }
+      if (this.role == "ROLE_PRE_SEED") {
+        this.apiService.getPreseedByUserId(this.userId).subscribe({
+          next: (data) => {this.dataPreSeed = data; console.log(data);
+          },
+          error: err => console.error("Error fetching PreSeed:", err)
+        })
+      }
+      if (this.role == "ROLE_INCUBATOR") {
+        this.apiService.getIncubatorByUserId(this.userId).subscribe({
+          next: (data) => {this.dataIncubator = data; console.log(data);
+          },
+          error: err => console.error("Error fetching Incubator:", err)
         })
       }
     }

@@ -8,7 +8,8 @@ public class StartupDTO {
 	private String pendingStage;
 	private String startupName;
 	private String StartupLogo;
-    private String BusinessRegistrationNumber;
+	private int status;
+	private String BusinessRegistrationNumber;
 	private String Industry;
 	private String BriefDescription;
 	private String UploadGovernmentIssuedID;

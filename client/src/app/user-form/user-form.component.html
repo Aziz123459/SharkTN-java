@@ -21,6 +21,14 @@
                             
                         </div>
                         <div class="form-group">
+                            <label for="profile"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="file" name="profile" [(ngModel)]="new.profile" id="profile" placeholder="Add your profile picture" (change)="onFileSelected($event, 0)"/>
+                            <small class="form-text text-muted">
+                                {{ selectedFile[0]?.name || 'No file selected' }}
+                            </small>
+                            
+                        </div>
+                        <div class="form-group">
                             <label for="phone"><i class="zmdi zmdi-email"></i></label>
                             <input type="number" name="phone" id="phone" [(ngModel)]="new.phone" placeholder="Your Phone Number" />
                             

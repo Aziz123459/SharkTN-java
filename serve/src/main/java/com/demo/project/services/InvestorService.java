@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.DTOS.InvestorWithUserDTO;
+import com.demo.project.DTOS.StartupWithHisUserDTO;
+import com.demo.project.models.Startup;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -73,6 +76,17 @@ public class InvestorService {
         return investorRepo.findByUserId(id)
                 .map(this::convertEntityToDto)
                 .orElseThrow(() -> new RuntimeException("Investor not found"));
+    }
+
+    public List<InvestorWithUserDTO> getAllInvestorsWithHisUsersDTO(){
+        return investorRepo.findAll()
+                .stream().map(this::convertEntityToDtoWithUsers)
+                .collect(Collectors.toList());
+    }
+
+    public InvestorWithUserDTO convertEntityToDtoWithUsers(Investor investor) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        return modelMapper.map(investor, InvestorWithUserDTO.class);
     }
     public Investor getInvestorByUserIdEntity(Long id) {
         return investorRepo.findByUserId(id)

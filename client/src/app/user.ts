@@ -8,6 +8,7 @@ export interface User {
     phone?:Number
     adress?:string
     role?:string
+    profile?:string
     createdAt?: string
     updatedAt?: string
 }

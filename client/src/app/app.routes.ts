@@ -13,6 +13,8 @@ import { PendingComponent } from './pending/pending.component';
 import { ChatComponent } from './chat/chat.component';
 import { BookingComponent } from './booking/booking.component';
 import { MyBookingComponent } from './my-booking/my-booking.component';
+import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 
@@ -40,6 +42,8 @@ export const routes: Routes = [
     {path:'booking/incubator',component:MyBookingComponent},
     {path:'booking/preseed',component:MyBookingComponent},
 
+    {path:'admin-requests',component:AdminRequestsComponent},
+    {path:'request/:id',component:RequestsComponent}
 ];
 
 

@@ -25,7 +25,8 @@ public class Incubator {
 	@Email
 	private String email;
 	@NotEmpty
-	private String message;
+    @Column(name = "message", length = 222222222)
+    private String message;
 	@Column(updatable = false)
     private Date createdAt;
 	
