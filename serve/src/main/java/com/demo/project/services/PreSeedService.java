@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.DTOS.StartupDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ public class PreSeedService {
 
     // Find PreSeed by ID
     public PreSeedDTO getPreSeedByIdDTO(Long id) {
+
         return convertEntityToDto(preSeedRepo.findById(id).orElse(null));
     }
 
@@ -64,6 +66,12 @@ public class PreSeedService {
         } else {
             return null;
         }
+    }
+
+    public PreSeedDTO getPreseedByUserId(Long id) {
+        return preSeedRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Preseed not found"));
     }
 
     // Convert PreSeed entity to DTO

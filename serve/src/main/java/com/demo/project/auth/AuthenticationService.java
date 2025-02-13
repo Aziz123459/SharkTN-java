@@ -30,6 +30,7 @@ public class AuthenticationService {
 				.email(request.getEmail())
 				.role(request.getRole())
 				.adress(request.getAdress())
+				.profile(request.getProfile())
 				.build();
 		System.out.print(user+"user");
 		repository.save(user);

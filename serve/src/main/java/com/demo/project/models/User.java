@@ -62,6 +62,8 @@ public class User implements UserDetails {
 	
     @NotNull
     private String adress;
+
+	@NotNull
 	private String profile;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", length = 50)

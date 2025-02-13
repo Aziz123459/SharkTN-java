@@ -8,11 +8,21 @@ body {
   padding: 20px;
 }
 
+.full-width {
+  width: 100%;
+  height: auto; 
+  max-height: 600px;
+  display: block; 
+  margin: 0; 
+  padding: 0; 
+}
+
 /* Card Styles */
 .card {
   border: none; /* Remove default border */
   border-radius: 10px; /* Rounded corners */
   transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+  min-height: 300px;
 }
 
 .card:hover {

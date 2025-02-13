@@ -10,6 +10,8 @@ import { FavouriteComponent } from './favourite/favourite.component';
 import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PendingComponent } from './pending/pending.component';
+import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 
@@ -25,7 +27,9 @@ export const routes: Routes = [
     { path: 'display/:type/:id', component: DisplayComponent },
     {path:'favorites' ,component:FavouriteComponent},
     {path:'admin-dashboard',component:AdminDashbordComponent},
-    {path:'edit/profile',component:EditProfileComponent}
+    {path:'admin-requests',component:AdminRequestsComponent},
+    {path:'edit/profile',component:EditProfileComponent},
+    {path:'request/:id',component:RequestsComponent}
 ];
 
 

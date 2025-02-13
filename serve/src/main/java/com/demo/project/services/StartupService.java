@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.DTOS.StartupWithHisUserDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -59,12 +60,51 @@ public class StartupService {
             if (startup.getBriefDescription() != null){
             	oldStartup.setBriefDescription(startup.getBriefDescription());
             }
+            if (startup.getUploadBusinessRegistrationCertificate() != null){
+                oldStartup.setUploadBusinessRegistrationCertificate(startup.getUploadBusinessRegistrationCertificate());
+            }
+            if (startup.getUploadGovernmentIssuedID() != null){
+                oldStartup.setUploadGovernmentIssuedID(startup.getUploadGovernmentIssuedID());
+            }
+            if (startup.getBusinessRegistrationNumber() != null){
+                oldStartup.setBusinessRegistrationNumber(startup.getBusinessRegistrationNumber());
+            }
             // finish all the entities in the model
             return convertEntityToDto(startupRepo.save(oldStartup));
 
         }else {
             return null;
         }
+    }
+
+    public StartupDTO acceptStartup(Long id){
+        Startup optionalStartup = startupRepo.findById(id).get();
+        optionalStartup.setStatus(1);
+        System.out.println(optionalStartup.getStatus());
+        Startup accepted=startupRepo.save(optionalStartup);
+        return convertEntityToDto(accepted);
+        }
+
+    public StartupDTO denyStartup(Long id){
+        Startup optionalStartup = startupRepo.findById(id).get();
+        optionalStartup.setStatus(2);
+        System.out.println(optionalStartup.getStatus());
+        Startup denied=startupRepo.save(optionalStartup);
+        return convertEntityToDto(denied);
+    }
+
+    public StartupDTO getStartupBackToPending(Long id){
+        Startup optionalStartup = startupRepo.findById(id).get();
+        optionalStartup.setStatus(0);
+        System.out.println(optionalStartup.getStatus());
+        Startup pending=startupRepo.save(optionalStartup);
+        return convertEntityToDto(pending);
+    }
+
+    public List<StartupWithHisUserDTO> getAllStartupsWithHisUsersDTO(){
+        return startupRepo.findAll()
+                .stream().map(this::convertEntityToDtoWithUsers)
+                .collect(Collectors.toList());
     }
 	
 	public StartupDTO getStartupByUserId(Long id) {
@@ -78,6 +118,10 @@ public class StartupService {
         return modelMapper.map(startup, StartupDTO.class);
     }
 
+    public StartupWithHisUserDTO convertEntityToDtoWithUsers(Startup startup) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        return modelMapper.map(startup, StartupWithHisUserDTO.class);
+    }
     public Startup convertDtoToEntity(StartupDTO startupDTO) {
         return modelMapper.map(startupDTO, Startup.class);
     }

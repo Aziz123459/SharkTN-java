@@ -36,9 +36,11 @@ public class PreSeed {
 	@NotEmpty
 	private String projectName;
 	@NotEmpty
-	private String discription;
+    @Column(name = "discription", length = 222222222)
+    private String discription;
 	@NotEmpty
-	private String problemSolve;
+    @Column(name = "problemSolve", length = 222222222)
+    private String problemSolve;
 	@Column(updatable = false)
     private Date createdAt;
 	

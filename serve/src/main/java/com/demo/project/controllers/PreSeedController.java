@@ -2,6 +2,7 @@ package com.demo.project.controllers;
 
 import java.util.List;
 
+import com.demo.project.DTOS.StartupDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,8 +61,13 @@ public class PreSeedController {
     }
 
     // Update an existing pre-seed investment
-    @PutMapping("/preseed/edit/{id}")
+    @PutMapping("/preseed/{id}")
     public PreSeedDTO updatePreSeed(@PathVariable("id") Long id, @RequestBody PreSeed preSeed) {
         return preSeedService.updatePreSeed(id, preSeed);
+    }
+
+    @GetMapping("/preseed/user/{id}")
+    public PreSeedDTO getPreseedByUserId(@PathVariable("id") Long id) {
+        return preSeedService.getPreseedByUserId(id);
     }
 }

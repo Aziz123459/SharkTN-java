@@ -1,155 +1,166 @@
 <app-home-navbar></app-home-navbar>
+<img src="assests\hero-image3.jpg" alt="img" class="full-width" id="home">
 <div class="page">
+  <div class="container col-md-8 mt-5 pt-2">
+    <!-- Dynamic Heading Based on Type -->
+    <h1 *ngIf="type === 'ROLE_ADMIN'" class="mt-5 display-4 text-center animated fadeInDown">Admin Dashboard</h1>
 
-<div class="container col-md-8 mt-5 pt-2">
-  <!-- Dynamic Heading Based on Type -->
-  <h1 *ngIf="type === 'ROLE_ADMIN'" class="mt-5 display-4 text-center animated fadeInDown">Admin Dashboard</h1>
-
-  <!-- Admin Home Page -->
-    <!-- Investors Section -->
-    <div *ngIf="type === 'ROLE_ADMIN' && allInvestors.length > 0; else noInvestors" class="row animated fadeInUp">
-      <h3 class="text-center mb-4">Investor Details</h3>
-      <div *ngFor="let investor of allInvestors" class="col-md-6">
-        <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(investor.id)">
-          <div class="card-body">
-            <p><strong>Email:</strong> {{ investor.investorEmail }}</p>
-            <p><strong>Investment Amount:</strong> {{ investor.investmentAmount }} $</p>
-            <p><strong>Message:</strong> {{ investor.message }}</p>
+    <!-- Admin Home Page -->
+      <!-- Investors Section -->
+      <div *ngIf="type === 'ROLE_ADMIN' && allInvestors.length > 0; else noInvestors" class="row animated fadeInUp">
+        <h3 class="text-center mb-4">Investor Details</h3>
+        <div *ngFor="let investor of allInvestors" class="col-md-6">
+          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(investor.id)">
+            <div class="card-body">
+              <p><strong>Email:</strong> {{ investor.investorEmail }}</p>
+              <p><strong>Investment Amount:</strong> {{ investor.investmentAmount }} $</p>
+              <p><strong>Message:</strong> {{ truncateText(investor.message ?? '', 130) }}</p>
+            </div>
           </div>
         </div>
       </div>
+      <ng-template #noInvestors><p class="text-center"></p></ng-template>
+
+      <!-- Display All Startups -->
+      <div *ngIf="allStartups.length > 0; else noStartups" class="row">
+        <h3>Startup Details</h3>
+        <div *ngFor="let startup of allStartups" class="col-md-6">
+          <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
+            <div class="card-header text-center">
+              <img *ngIf="type === 'ROLE_ADMIN'" src="{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+            </div>
+            <div class="card-body">
+              <p><strong>Name:</strong> {{ startup.startupName }}</p>
+              <p><strong>Industry:</strong> {{ startup.industry }}</p>
+              <p><strong>Description:</strong> {{ truncateText(startup.briefDescription ?? '', 130) }}</p>
+              <p><strong>Team Size:</strong> {{ startup.teamNumber }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noStartups><p class="text-center"></p></ng-template>
+
+      <!-- Incubators Section -->
+      <div *ngIf="type === 'ROLE_ADMIN' && allIncubators.length > 0" class="row animated fadeInUp">
+        <h3 class="text-center mb-4">Incubators</h3>
+        <div *ngFor="let incubator of allIncubators" class="col-md-6">
+          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(incubator.id)">
+            <div class="card-body">
+              <p><strong>Email:</strong> {{ incubator.email }}</p>
+              <p><strong>Message:</strong> {{ truncateText(incubator.message ?? '', 130) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-Seed Section -->
+      <div *ngIf="type === 'ROLE_ADMIN' && allPreSeeds.length > 0" class="row animated fadeInUp">
+        <h3 class="text-center mb-4">Pre-Seed Startups</h3>
+        <div *ngFor="let preSeed of allPreSeeds" class="col-md-6">
+          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(preSeed.id)">
+            <div class="card-body">
+              <p><strong>Project Name:</strong> {{ preSeed.projectName }}</p>
+              <p><strong>Email:</strong> {{ preSeed.email }}</p>
+              <p><strong>Description:</strong> {{ truncateText(preSeed.discription ?? '', 130) }}</p>
+              <p><strong>Problem Solved:</strong> {{ truncateText(preSeed.problemSolve ?? '', 130) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- Investor or Startup for Non-Admin -->
+    <div *ngIf="type === 'ROLE_INVESTOR'" class="mt-4">
+      <h1>All Startups</h1>
+      <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
+        <div *ngFor="let entry of item" class="col-6 mb-4">    
+          <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
+            <div class="card-header">
+              <img *ngIf="isStartup(entry)" [src]="entry.startupLogo" alt="Logo" 
+                  height="80px" width="80px" style="border-radius: 50%;">
+            </div>
+            <div class="card-body">
+              <ng-container *ngIf="isStartup(entry)">
+                <p><strong>Name:</strong> {{ entry.startupName }}</p>
+                <p><strong>Industry:</strong> {{ entry.industry }}</p>
+                <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
+                <p><strong>Startup Email:</strong> {{ entry.startupEmail }}</p>
+                <p><strong>Description:</strong> {{ truncateText(entry.briefDescription ?? '', 130) }}</p>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <ng-template #noData>
+        <p>No startups available.</p>
+      </ng-template>
     </div>
-    <ng-template #noInvestors><p class="text-center"></p></ng-template>
 
-    <!-- Display All Startups -->
-    <div *ngIf="allStartups.length > 0; else noStartups" class="row">
-      <h3>Startup Details</h3>
-      <div *ngFor="let startup of allStartups" >
-        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
-          <div class="card-header text-center">
-            <img *ngIf="type === 'ROLE_ADMIN'" src="{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
-          </div>
-          <div class="card-body">
-            <p><strong>Name:</strong> {{ startup.startupName }}</p>
-            <p><strong>Industry:</strong> {{ startup.industry }}</p>
-            <p><strong>Description:</strong> {{ startup.briefDescription }}</p>
-            <p><strong>Team Size:</strong> {{ startup.teamNumber }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ng-template #noStartups><p class="text-center"></p></ng-template>
-
-    <!-- Incubators Section -->
-    <div *ngIf="type === 'ROLE_ADMIN' && allIncubators.length > 0" class="row animated fadeInUp">
-      <h3 class="text-center mb-4">Incubators</h3>
-      <div *ngFor="let incubator of allIncubators" class="col-md-6">
-        <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(incubator.id)">
-          <div class="card-body">
-            <p><strong>Email:</strong> {{ incubator.email }}</p>
-            <p><strong>Message:</strong> {{ incubator.message }}</p>
-          </div>
-        </div>
-      </div>
+    <div *ngIf="startupData.status == 0">
+      <app-pending></app-pending>
     </div>
 
-    <!-- Pre-Seed Section -->
-    <div *ngIf="type === 'ROLE_ADMIN' && allPreSeeds.length > 0" class="row animated fadeInUp">
-      <h3 class="text-center mb-4">Pre-Seed Startups</h3>
-      <div *ngFor="let preSeed of allPreSeeds" class="col-md-6">
-        <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(preSeed.id)">
-          <div class="card-body">
-            <p><strong>Project Name:</strong> {{ preSeed.projectName }}</p>
-            <p><strong>Email:</strong> {{ preSeed.email }}</p>
-            <p><strong>Description:</strong> {{ preSeed.discription }}</p>
-            <p><strong>Problem Solved:</strong> {{ preSeed.problemSolve }}</p>
-          </div>
-        </div>
-      </div>
+    <div *ngIf="startupData.status == 2">
+      <app-denied></app-denied>
     </div>
     
-
-  <!-- Investor or Startup for Non-Admin -->
-  <div *ngIf="type === 'ROLE_INVESTOR'" class="mt-4">
-    <h1>All Startups</h1>
-    <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
-      <div *ngFor="let entry of item" class="col-6 mb-4">    
-        <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
-          <div class="card-header">
-            <img *ngIf="isStartup(entry)" [src]="entry.startupLogo" alt="Logo" 
-                 height="80px" width="80px" style="border-radius: 50%;">
+    <div *ngIf="type === 'ROLE_STARTUP_FOUNDER' && startupData.status ==1" class="mt-4">
+      <h2 class="text-center mb-5">All Investors</h2>
+      <div class="row d-flex flex-wrap">
+        <div *ngFor="let entry of itemsInvestors" class="col-6 mb-4">
+          <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
+            <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->
+            <div class="card-body">
+              <ng-container>
+                <div class="mb-4" style="height: 100px; width: 100px; ">
+                  <img src="{{entry.user?.profile}}" alt="" style="height: 100%; width: 100%; border-radius: 50%">
+                </div>
+                <p><strong>Full name:</strong> {{ entry.user?.fullname }}</p>
+                <p><strong>Investor Email:</strong> {{ entry.investorEmail }}</p>
+                <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }} $</p>
+                <p><strong>Message:</strong> {{ truncateText(entry.message ?? '', 130) }}</p>
+              </ng-container>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- Incubator Home Page (Viewing Pre-Seed Startups) -->
+  <div *ngIf="type === 'ROLE_INCUBATOR'" class="mt-4 animated fadeIn">
+    <h2 class="text-center display-4">Pre-Seed Entrepreneur</h2>
+    <div *ngIf="item2.length > 0" class="row">
+      <div *ngFor="let entry of item2">
+        <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(entry.id)">
           <div class="card-body">
-            <ng-container *ngIf="isStartup(entry)">
-              <p><strong>Name:</strong> {{ entry.startupName }}</p>
-              <p><strong>Industry:</strong> {{ entry.industry }}</p>
-              <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
-              <p><strong>Startup Email:</strong> {{ entry.startupEmail }}</p>
-              <p><strong>Description:</strong> {{ truncateText(entry.briefDescription ?? '', 130) }}</p>
-            </ng-container>
+            
+              <p><strong>Project Name:</strong> {{ entry.projectName }}</p>
+              <p><strong>Email:</strong> {{ entry.email }}</p>
+              <p><strong>Description:</strong> {{ entry.discription }}</p>
+              <p><strong>Problem Solved:</strong> {{ entry.problemSolve }}</p>
           </div>
         </div>
       </div>
     </div>
-  
-    <ng-template #noData>
-      <p>No startups available.</p>
-    </ng-template>
   </div>
-  
 
-  <div *ngIf="type === 'ROLE_STARTUP_FOUNDER'" class="mt-4">
-    <h2>All Investors</h2>
-    <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
-      <div *ngFor="let entry of item" class="col-6 mb-4">
-        <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
-          <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->
+  <!-- Pre-Seed Home Page (Viewing Incubators) -->
+  <div *ngIf="type === 'ROLE_PRE_SEED'" class="mt-4 animated fadeIn">
+    
+    <h2 class="text-center display-4">Available Incubators</h2>
+    <div *ngIf="item3.length > 0" class="row">
+      <div *ngFor="let test of item3">
+        <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(test.id)">
           <div class="card-body">
-            <ng-container *ngIf="isInvestor(entry)">
-              <p><strong>Investor Email:</strong> {{ entry.investorEmail }}</p>
-              <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }} $</p>
-              <p><strong>Message:</strong> {{ truncateText(entry.message ?? '', 130) }}</p>
-            </ng-container>
+            
+              <p><strong>Email:</strong> {{ test.email }}</p>
+              <p><strong>Message:</strong> {{ test.message }}</p>
+          
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Incubator Home Page (Viewing Pre-Seed Startups) -->
-<div *ngIf="type === 'ROLE_INCUBATOR'" class="mt-4 animated fadeIn">
-  <h2 class="text-center display-4">Pre-Seed Startups</h2>
-  <div *ngIf="item2.length > 0" class="row">
-    <div *ngFor="let entry of item2">
-      <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(entry.id)">
-        <div class="card-body">
-          
-            <p><strong>Project Name:</strong> {{ entry.projectName }}</p>
-            <p><strong>Email:</strong> {{ entry.email }}</p>
-            <p><strong>Description:</strong> {{ entry.discription }}</p>
-            <p><strong>Problem Solved:</strong> {{ entry.problemSolve }}</p>
-        </div>
-      </div>
     </div>
   </div>
-</div>
-
-<!-- Pre-Seed Home Page (Viewing Incubators) -->
-<div *ngIf="type === 'ROLE_PRE_SEED'" class="mt-4 animated fadeIn">
-  
-  <h2 class="text-center display-4">Available Incubators</h2>
-  <div *ngIf="item3.length > 0" class="row">
-    <div *ngFor="let test of item3">
-      <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(test.id)">
-        <div class="card-body">
-          
-            <p><strong>Email:</strong> {{ test.email }}</p>
-            <p><strong>Message:</strong> {{ test.message }}</p>
-         
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
 </div>
 <app-logged-in-footer></app-logged-in-footer>

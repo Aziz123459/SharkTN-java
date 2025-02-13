@@ -1,0 +1,84 @@
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .clickable-image:hover {
+    transform: scale(1.1);
+  }
+
+  .modal-dialog {
+    max-width: 80%; /* Adjust width as needed */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Left Section: User & Startup Info */
+  .info-section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Right Section: Documents & Buttons */
+  .documents-section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  /* Images */
+  .clickable-image, .documents-section img {
+    display: block;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .clickable-image:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Buttons */
+  .button-group {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:nth-child(1) {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button:nth-child(2) {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button:nth-child(3) {
+    background-color: #464444;
+    color: white;
+  }

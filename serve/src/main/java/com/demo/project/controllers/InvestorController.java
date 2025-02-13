@@ -2,6 +2,8 @@ package com.demo.project.controllers;
 
 import java.util.List;
 
+import com.demo.project.DTOS.InvestorWithUserDTO;
+import com.demo.project.DTOS.StartupWithHisUserDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -37,6 +39,11 @@ public class InvestorController {
     @GetMapping("/all/investors")
     public List<InvestorDTO> getAllInvestorsDTO(){
         return investorService.getAllInvestorsDTO();
+    }
+
+    @GetMapping("/all/investors/users")
+    public List<InvestorWithUserDTO> getAllInvestorsWithUsersDTO(){
+        return investorService.getAllInvestorsWithHisUsersDTO();
     }
 
     @PostMapping("/investor/new")

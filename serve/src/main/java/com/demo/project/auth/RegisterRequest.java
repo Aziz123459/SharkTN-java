@@ -18,6 +18,7 @@ private String fullname;
 private Date birth ;
 private String email;
 private String password;
+private String profile;
 private String phone;
 private String confirm;
 private String adress;

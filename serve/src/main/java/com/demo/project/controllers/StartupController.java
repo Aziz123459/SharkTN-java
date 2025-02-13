@@ -2,6 +2,7 @@ package com.demo.project.controllers;
 
 import java.util.List;
 
+import com.demo.project.DTOS.StartupWithHisUserDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -37,6 +38,11 @@ public class StartupController {
         return startupService.getAllStartupsDTO();
     }
 
+    @GetMapping("/all/startups/users")
+    public List<StartupWithHisUserDTO> getAllStartupsWithUsersDTO(){
+        return startupService.getAllStartupsWithHisUsersDTO();
+    }
+
     @PostMapping("/startup/new")
     public StartupDTO createStartup(@RequestBody Startup startup, HttpServletRequest request){
         // Extract token from Authorization header
@@ -69,4 +75,20 @@ public class StartupController {
     public StartupDTO getStartupByUserId(@PathVariable("id") Long id) {
     	return startupService.getStartupByUserId(id);
     }
+
+    @PutMapping("/admin/accept/{id}")
+    public StartupDTO acceptStartup(@PathVariable("id") Long id) {
+        return startupService.acceptStartup(id);
+    }
+
+    @PutMapping("/admin/deny/{id}")
+    public StartupDTO denyStartup(@PathVariable("id") Long id) {
+        return startupService.denyStartup(id);
+    }
+
+    @PutMapping("/startup/pending/{id}")
+    public StartupDTO getStartupBackToPending(@PathVariable("id") Long id) {
+        return startupService.getStartupBackToPending(id);
+    }
+
 }

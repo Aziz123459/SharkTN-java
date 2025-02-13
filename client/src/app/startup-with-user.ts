@@ -1,4 +1,6 @@
-export interface Startup {
+import { User } from "./user"
+
+export interface StartupWithUser {
     id?:string 
     startupName?:string
     startupLogo?:string
@@ -10,7 +12,7 @@ export interface Startup {
     linkedInorSocialMediaProfile?:string
     teamNumber?:Number
     status?:Number
-    userId?:string | null
+    user?:User
     startupEmail?:string
     createdAt?: string
     updatedAt?: string

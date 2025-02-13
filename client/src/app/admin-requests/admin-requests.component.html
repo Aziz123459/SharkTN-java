@@ -1,0 +1,101 @@
+<app-home-navbar></app-home-navbar>
+<div  class="container pt-5 mt-5 pb-5">
+  <div *ngIf="startups.length > 0">
+
+  
+    <h3 class="mt-4">Startups requests</h3>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email Adress</th>
+          <th>Account Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let startup of pendingStartups">
+          <td>{{ startup.user?.fullname }}</td>
+          <td>{{ startup.user?.email }}</td>
+          <td>{{ startup.user?.role }}</td>
+          <td>
+            <a routerLink="/request/{{startup.user?.id}}" class="delete-button">View</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <!-- Investor Table -->
+<div *ngIf="investors.length > 0">
+  <h3 class="mt-4">Investors</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of investors">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="delete-button">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- If no users, show no data message -->
+<!-- Investor Table -->
+<div *ngIf="incubators.length > 0">
+  <h3 class="mt-4">Incubator</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of incubators">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="delete-button">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="preseeds.length > 0">
+  <h3 class="mt-4">Preseed_Entrepreneur</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of preseeds">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="delete-button">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>

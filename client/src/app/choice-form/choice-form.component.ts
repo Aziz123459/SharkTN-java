@@ -104,7 +104,7 @@ export class ChoiceFormComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.error('Error creating investor:', err);
+          console.error('Error creating investor:', err); 
         },
       });
     }
@@ -158,6 +158,9 @@ export class ChoiceFormComponent implements OnInit {
       this.apiService.creatStartup(this.startupData).subscribe({
         next: (response) => {
           console.log('Startup created successfully:', response);
+          console.log('response.status:', response.status);
+          console.log('this.startupData.status:', this.startupData.status);
+
           if (response.status === 0) {
             this.router.navigate(['/pending']);
           } else {

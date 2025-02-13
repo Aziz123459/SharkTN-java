@@ -29,6 +29,14 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/all/startups`)
   }
 
+  getstartupswithusers(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/all/startups/users`)
+  }
+
+  getinvestorswithusers(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/all/investors/users`)
+  }
+
   getstartup(id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup/${id}`).pipe(  
       catchError(this.handleError)
@@ -57,6 +65,19 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/user/${id}`)
   }
 
+  getStartupBackToPending(id : string | undefined): Observable<any>{
+    return this.http.put(`${this.baseUrl}/startup/pending/${id}`,null)
+
+  }
+
+  acceptStartup(id : string | undefined): Observable<any>{
+    return this.http.put(`${this.baseUrl}/admin/accept/${id}`,null)
+  }
+
+  denyStartup(id : string | undefined): Observable<any>{
+    return this.http.put(`${this.baseUrl}/admin/deny/${id}`,null)
+  }
+
   getstartupByUserId(id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup/user/${id}`).pipe(
       catchError(this.handleError)
@@ -65,6 +86,18 @@ export class ApiService {
 
   getInvestorById(id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/investor/user/${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getPreseedByUserId(id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/preseed/user/${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getIncubatorByUserId(id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/incubator/user/${id}`).pipe(
       catchError(this.handleError)
     )
   }
@@ -184,8 +217,17 @@ updateInvestor(data : Investor): Observable<any> {
   )
 }
 updateStartup(data : Startup): Observable<any> {
-  console.log("data from service : "+ data.briefDescription)
   return this.http.put(`${this.baseUrl}/startup/${data.id}`,data).pipe(  
+    catchError(this.handleError)
+  )
+}
+updatePreseed(data : PreSeed): Observable<any> {
+  return this.http.put(`${this.baseUrl}/preseed/${data.id}`,data).pipe(  
+    catchError(this.handleError)
+  )
+}
+updateIncubator(data : Incubator): Observable<any> {
+  return this.http.put(`${this.baseUrl}/incubator/${data.id}`,data).pipe(  
     catchError(this.handleError)
   )
 }

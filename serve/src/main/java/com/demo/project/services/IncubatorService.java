@@ -9,11 +9,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.demo.project.DTOS.IncubatorDTO;
-import com.demo.project.DTOS.InvestorDTO;
 import com.demo.project.models.Incubator;
 import com.demo.project.models.Investor;
 import com.demo.project.repositories.IncubatorRepository;
-import com.demo.project.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,8 +20,6 @@ import lombok.RequiredArgsConstructor;
 public class IncubatorService {
 private final ModelMapper modelMapper;
 private final IncubatorRepository incubatorRepo;
-private final UserRepository userRepository;
-private final JwtService jwtService;
 
 
 public List<IncubatorDTO>getAllIncubatorsDTO(){
@@ -56,6 +52,12 @@ public IncubatorDTO updateIncubator(Long id, Incubator incubator){
         return null;
     }
 }
+
+    public IncubatorDTO getIncubatorByUserId(Long id) {
+        return incubatorRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Incubator not found"));
+    }
 
 public IncubatorDTO convertEntityToDto(Incubator incubator) {
     modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
