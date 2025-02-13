@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class HomeNavbarComponent {
   type = localStorage.getItem("role");
   id = localStorage.getItem("userId");
-
+  bookings: any[] = [];
   constructor(private apiService: ApiService, private router: Router) {}
 
   onLogout(): void {
@@ -38,5 +38,7 @@ export class HomeNavbarComponent {
     await localStorage.clear();
     this.router.navigate(['/authenticate']);
   }
+    // Fetch user bookings based on role
+    
 }
 

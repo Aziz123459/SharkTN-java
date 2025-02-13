@@ -38,20 +38,27 @@ public class PreSeedController {
     // Create a new pre-seed investment
     @PostMapping("/new/preseed")
     public PreSeedDTO createPreSeed(@RequestBody PreSeed preSeed, HttpServletRequest request) {
-        // Extract token from Authorization header
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             Long userId = jwtService.extractUserId(token);
-            if (userRepository.findById(userId).isPresent()) {
-                User user = userRepository.findById(userId).get();
-                preSeed.setUser (user); // Set the user for the pre-seed investment
-                return preSeedService.createPreSeed(preSeed);
+
+            System.out.println("Extracted User ID: " + userId); // ✅ Debug log
+
+            if (userId == null) {
+                throw new RuntimeException("Failed to extract user ID from token.");
             }
-            throw new RuntimeException("User  not found");
+
+            return userRepository.findById(userId)
+                    .map(user -> {
+                        preSeed.setUser(user); // Set the user for the pre-seed investment
+                        return preSeedService.createPreSeed(preSeed);
+                    })
+                    .orElseThrow(() -> new RuntimeException("User not found"));
         }
         throw new RuntimeException("Authorization header is missing or invalid");
     }
+
 
     // Get a specific pre-seed investment by ID
     @GetMapping("/preseed/{id}")

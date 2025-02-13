@@ -10,6 +10,9 @@ import { FavouriteComponent } from './favourite/favourite.component';
 import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PendingComponent } from './pending/pending.component';
+import { ChatComponent } from './chat/chat.component';
+import { BookingComponent } from './booking/booking.component';
+import { MyBookingComponent } from './my-booking/my-booking.component';
 
 
 
@@ -25,7 +28,18 @@ export const routes: Routes = [
     { path: 'display/:type/:id', component: DisplayComponent },
     {path:'favorites' ,component:FavouriteComponent},
     {path:'admin-dashboard',component:AdminDashbordComponent},
-    {path:'edit/profile',component:EditProfileComponent}
+    {path:'edit/profile',component:EditProfileComponent},
+    { path: 'chat/:receiverId', component:ChatComponent } ,
+    { path: 'chat', component:ChatComponent },
+    {path:'booking/investor/:id',component:BookingComponent},
+    {path:'booking/startup/:id',component:BookingComponent},
+    {path:'booking/incubator/:id',component:BookingComponent},
+    {path:'booking/preSeed/:id',component:BookingComponent},
+    {path:'booking/startup',component:MyBookingComponent},
+    {path:'booking/investor',component:MyBookingComponent},
+    {path:'booking/incubator',component:MyBookingComponent},
+    {path:'booking/preseed',component:MyBookingComponent},
+
 ];
 
 

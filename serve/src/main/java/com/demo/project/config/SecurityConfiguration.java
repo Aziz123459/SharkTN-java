@@ -28,10 +28,13 @@ http
 	.requestMatchers("/api/v1/auth/**")
 	.permitAll()
 	.requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-	.requestMatchers("/api/v1/startup/**").hasRole("INVESTOR")
-	.requestMatchers("/api/v1/investor/**").hasRole("STARTUP_FOUNDER")
-	.requestMatchers(HttpMethod.GET, "/api/v1/incubator/**").permitAll() // Allow GET request
+		.requestMatchers("/api/v1/startup/**").permitAll()
+		.requestMatchers(HttpMethod.POST, "/api/v1/investor/new").authenticated()
+
+		.requestMatchers(HttpMethod.GET, "/api/v1/incubator/**").permitAll() // Allow GET request
 	.requestMatchers(HttpMethod.GET, "/api/v1/preseed/**").permitAll() // Allow GET request
+		.requestMatchers("/api/v1/any/**").permitAll()
+		.requestMatchers("/api/chat/**").permitAll()
 	.requestMatchers("/api/v1/startupProfile/**").hasAnyRole( "STARTUP_FOUNDER")
 	.requestMatchers("/api/v1/investorProfile/**").hasAnyRole( "INVESTOR")
 	.requestMatchers("/api/v1/investstart/**").hasAnyRole("INVESTOR", "STARTUP_FOUNDER")

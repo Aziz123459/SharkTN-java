@@ -7,8 +7,13 @@
     
       <nav class="nav-links">
         <a mat-button routerLink="/home/{{type}}">Home</a>
-        <a mat-button routerLink="/home/{{type}}">Home</a>
         <a mat-button routerLink="/profile/{{id}}" >Profile</a>
+        <a mat-button routerLink="/chat" >chat</a>
+         <!-- Bookings Button -->
+         <a mat-button *ngIf="type === 'ROLE_STARTUP_FOUNDER'" routerLink="/booking/startup">Bookings Request</a>
+         <a mat-button *ngIf="type === 'ROLE_INVESTOR'" routerLink="/booking/investor">Bookings Request</a>
+         <a mat-button *ngIf="type === 'ROLE_INCUBATOR'" routerLink="/booking/incubator">Bookings Request</a>
+         <a mat-button *ngIf="type === 'ROLE_PRE_SEED'" routerLink="/booking/preseed">Bookings Request</a>
         <button mat-button *ngIf="type === 'ROLE_ADMIN'" routerLink="/admin-dashboard" class="auth-button">Admin</button>
         <button mat-button (click)="logout()" class="auth-button">Logout</button>
       </nav>

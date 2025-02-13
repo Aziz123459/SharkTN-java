@@ -38,22 +38,28 @@ public class StartupController {
     }
 
     @PostMapping("/startup/new")
-    public StartupDTO createStartup(@RequestBody Startup startup, HttpServletRequest request){
-        // Extract token from Authorization header
-    	System.out.print("+++++++++++++++++++++++"+startup);
+    public StartupDTO createStartup(@RequestBody Startup startup, HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             Long userId = jwtService.extractUserId(token);
-            if (userRepository.findById(userId).isPresent()) {
-                User user = userRepository.findById(userId).get();
-                startup.setUser(user);
-                return startupService.createStartup(startup);
+
+            System.out.println("Extracted User ID: " + userId); // ✅ Debug log
+
+            if (userId == null) {
+                throw new RuntimeException("Failed to extract user ID from token.");
             }
-            throw new RuntimeException("User not found");
+
+            return userRepository.findById(userId)
+                    .map(user -> {
+                        startup.setUser(user);
+                        return startupService.createStartup(startup);
+                    })
+                    .orElseThrow(() -> new RuntimeException("User not found"));
         }
         throw new RuntimeException("Authorization header is missing or invalid");
     }
+
 
     @PutMapping("/startup/{id}")
     public StartupDTO updateStartup(@PathVariable("id") Long id, @RequestBody Startup startup){

@@ -1,7 +1,10 @@
 <app-home-navbar></app-home-navbar>
 <div class="page">
-
 <div class="container col-md-8 mt-5 pt-2">
+  <div class="mt-5">
+    <input type="text" [(ngModel)]="search" (input)="filter() "
+    placeholder="Search Startup by Name ..." class="form-control">
+    </div>
   <!-- Dynamic Heading Based on Type -->
   <h1 *ngIf="type === 'ROLE_ADMIN'" class="mt-5 display-4 text-center animated fadeInDown">Admin Dashboard</h1>
 
@@ -24,7 +27,7 @@
     <!-- Display All Startups -->
     <div *ngIf="allStartups.length > 0; else noStartups" class="row">
       <h3>Startup Details</h3>
-      <div *ngFor="let startup of allStartups" >
+      <div *ngFor="let startup of filtredStartup" >
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
           <div class="card-header text-center">
             <img *ngIf="type === 'ROLE_ADMIN'" src="{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
@@ -73,7 +76,7 @@
   <div *ngIf="type === 'ROLE_INVESTOR'" class="mt-4">
     <h1>All Startups</h1>
     <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
-      <div *ngFor="let entry of item" class="col-6 mb-4">    
+      <div *ngFor="let entry of filtredStartup" class="col-6 mb-4">    
         <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
           <div class="card-header">
             <img *ngIf="isStartup(entry)" [src]="entry.startupLogo" alt="Logo" 
@@ -100,7 +103,7 @@
 
   <div *ngIf="type === 'ROLE_STARTUP_FOUNDER'" class="mt-4">
     <h2>All Investors</h2>
-    <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
+    <div *ngIf="item.length > 0" class="row d-flex flex-wrap">
       <div *ngFor="let entry of item" class="col-6 mb-4">
         <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
           <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->

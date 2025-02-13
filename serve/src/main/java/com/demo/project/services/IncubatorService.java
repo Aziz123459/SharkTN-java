@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.models.PreSeed;
+import com.demo.project.models.Startup;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,21 @@ public IncubatorDTO convertEntityToDto(Incubator incubator) {
     modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     return modelMapper.map(incubator, IncubatorDTO.class);
 }
+
+    public IncubatorDTO getIncubatorByUserId(Long id) {
+        return incubatorRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Investor not found"));
+    }
+    public Incubator getIncubatorById(Long id){
+        return incubatorRepo.findById(id).get();
+    }
+
+    public Incubator getIncubatorByUserIdEntity(Long id) {
+        return incubatorRepo.findByUserId(id)
+                .orElseThrow(() -> new RuntimeException("PreSeed not found"));
+    }
+
 
 public Investor convertDtoToEntity(IncubatorDTO incubatorDTO) {
     return modelMapper.map(incubatorDTO, Investor.class);

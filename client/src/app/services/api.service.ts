@@ -7,6 +7,7 @@ import { Investor } from '../investor';
 import { Favorite } from '../favorite';
 import { Incubator } from '../incubator';
 import { PreSeed } from '../pre-seed';
+import { Booking } from '../booking';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,12 @@ export class ApiService {
   getusers(): Observable<any>{
     return this.http.get(`${this.baseUrl}/admin/user/all`)
   }
+  // *****************************************************
+  // In your ApiService, add this new method
+getAllUsers(): Observable<User[]> {
+  return this.http.get<User[]>('http://localhost:8080/api/v1/users'); // Use the appropriate endpoint
+}
+// ************************************************************
 
   getuser(id: string | undefined): Observable<any>{
     return this.http.get(`${this.baseUrl}/profile/${id}`)
@@ -133,9 +140,20 @@ export class ApiService {
   }
   // ***********************************************
   private handleError(err: any): Observable<any> {
-    console.error('an error occurred!', err)
-    return throwError(()=>err.error.errors)
+    console.error('An error occurred!', err);
+    
+    // Check if the error response has a nested 'errors' field
+    if (err && err.error && err.error.errors) {
+      return throwError(() => err.error.errors);
+    } else if (err && err.message) {
+      // If no 'errors', fall back to the error message
+      return throwError(() => err.message);
+    } else {
+      // If the error structure is completely different, just return a generic message
+      return throwError(() => 'An unknown error occurred');
+    }
   }
+  
 
   private handleloginerror(err: any): Observable<any> {
     console.error('an error occurred!', err)
@@ -203,15 +221,57 @@ deleteUser(id: string): Observable<any> {
   return this.http.delete(`${this.baseUrl}/delete/${id}`, { responseType: 'json' });
 }
 
-// deleteStartupById(id: string | null | undefined):Observable<any> {
-//   return this.http.delete<Startup>(`${this.baseUrl}/startup/${id}`)
-// }
+deleteStartupById(id: string | null | undefined):Observable<any> {
+  return this.http.delete<Startup>(`${this.baseUrl}/startup/${id}`)
+}
 
-// deleteInvestorById(id: string | null | undefined):Observable<any> {
-//   return this.http.delete<Investor>(`${this.baseUrl}/investor/${id}`)
-// }
+deleteInvestorById(id: string | null | undefined):Observable<any> {
+  return this.http.delete<Investor>(`${this.baseUrl}/investor/${id}`)
+}
 
+  createBooking(booking: Booking,id:Number): Observable<Booking> {
+    return this.http.post<Booking>(`${this.baseUrl}/booking/create/investor/${id}`, booking);
+  }
 
+  createBooking2(booking: Booking,id:Number): Observable<Booking> {
+    return this.http.post<Booking>(`${this.baseUrl}/booking/create/startup/${id}`, booking);
+  }
+  createBooking3(booking: Booking,id:Number): Observable<Booking> {
+    return this.http.post<Booking>(`${this.baseUrl}/booking/create/incubator/${id}`, booking);
+  }
+  createBooking4(booking: Booking,id:Number): Observable<Booking> {
+    return this.http.post<Booking>(`${this.baseUrl}/booking/create/preSeed/${id}`, booking);
+  }
+  // Get all bookings
+  getAllBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booking/all`);
+  }
+
+  // Get booking by ID
+  getBookingById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.baseUrl}/booking/${id}`);
+  }
+
+  // Delete booking by ID
+  deleteBooking(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/booking/delete/${id}`);
+  }
+
+  getBookingsForStartup(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booking/startup`);
+  }
+  
+  getBookingsForInvestor(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booking/investor`);
+  }
+  
+  getBookingsForIncubator(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booking/incubator`);
+  }
+  
+  getBookingsForPreSeed(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booking/preseed`);
+  }
 
 
 

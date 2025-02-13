@@ -40,18 +40,24 @@ public class InvestorController {
     }
 
     @PostMapping("/investor/new")
-    public InvestorDTO createInvestor(@RequestBody Investor investor, HttpServletRequest request){
-        // Extract token from Authorization header
+    public InvestorDTO createInvestor(@RequestBody Investor investor, HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             Long userId = jwtService.extractUserId(token);
-            if (userRepository.findById(userId).isPresent()) { 
-                User user = userRepository.findById(userId).get();
-                investor.setUser(user);
-                return investorService.createInvestor(investor);
+
+            System.out.println("Extracted User ID: " + userId); // ✅ Debug log
+
+            if (userId == null) {
+                throw new RuntimeException("Failed to extract user ID from token.");
             }
-            throw new RuntimeException("User not found");
+
+            return userRepository.findById(userId)
+                    .map(user -> {
+                        investor.setUser(user);
+                        return investorService.createInvestor(investor);
+                    })
+                    .orElseThrow(() -> new RuntimeException("User not found"));
         }
         throw new RuntimeException("Authorization header is missing or invalid");
     }

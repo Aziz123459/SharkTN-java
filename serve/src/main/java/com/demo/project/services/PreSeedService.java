@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.models.Incubator;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -77,5 +78,12 @@ public class PreSeedService {
         PreSeed preSeed = modelMapper.map(preSeedDTO, PreSeed.class);
         // You may need to set the user based on userId if necessary
         return preSeed;
+    }
+    public  PreSeed getPreSeedByUserIdEntity(Long id) {
+        return preSeedRepo.findByUserId(id)
+                .orElseThrow(() -> new RuntimeException("PreSeed not found"));
+    }
+    public PreSeed getPreSeedById(Long id){
+        return preSeedRepo.findById(id).get();
     }
 }

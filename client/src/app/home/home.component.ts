@@ -11,20 +11,24 @@ import { LoggedInFooterComponent } from '../logged-in-footer/logged-in-footer.co
 import { User } from '../user';
 import { PreSeed } from '../pre-seed';
 import { Incubator } from '../incubator';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule, LoggedInFooterComponent],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule, LoggedInFooterComponent,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   type: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'| 'ROLE_ADMIN'|'ROLE_INCUBATOR'|'ROLE_PRE_SEED'| null = null; 
   item: (Investor | Startup)[] = []; 
+  start:(Startup)[]=[];
   item2:( PreSeed)[]=[];
   item3:(Incubator)[]=[]
   investorData: Investor = {};
+  filteredInvestor:Investor[]=[]
   startupData: Startup = {};
+  filtredStartup:Startup[]=[]
   incubatorData: Incubator = {}; 
   preSeedData: PreSeed = {}; 
   user: User = {};
@@ -32,6 +36,7 @@ export class HomeComponent {
   allStartups: Startup[] = [];
   allIncubators: Incubator[] = []; 
   allPreSeeds: PreSeed[] = []; 
+  search:String=""
 
   constructor(
     private route: ActivatedRoute,
@@ -56,7 +61,7 @@ export class HomeComponent {
       });
     } else if (this.type === 'ROLE_INVESTOR') {
       this.apiService.getstartups().subscribe({
-        next: (data: Startup[]) => (this.item = data),
+        next: (data: Startup[]) => (this.item = data,this.filtredStartup=data,this.start=data),
         error: (err) => console.error('Error fetching startups:', err),
         complete: () => console.info('Fetched all startups')
       });
@@ -173,6 +178,13 @@ export class HomeComponent {
   isPreSeed(entry:any):entry is PreSeed{
     return this.type ==='ROLE_PRE_SEED'
   }
+  filter(){
+    const query=this.search.toLowerCase().trim()
+    console.log(query)
+    this.filtredStartup=this.start.filter(item =>
+      item.startupName?.toLowerCase().includes(query) 
+    )
+}
 
 }
 

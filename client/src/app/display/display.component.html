@@ -52,6 +52,8 @@
   <div class="p-2 text-end">        
     <button (click)="sendEmail()" [disabled]="!startupData.startupEmail" class="btn btn-primary btn-sm">Contact By Email</button>
   </div>
+  <a routerLink="/chat/{{startupData.userId}}">chat </a>
+  <a routerLink="/booking/startup/{{startupData.id}}">booking</a>
   
 </div>
 
@@ -67,6 +69,8 @@
       <div class="p-2 text-end">        
         <button (click)="sendEmail()" [disabled]="!investorData.investorEmail" class="btn btn-primary btn-sm">Contact By Email</button>
       </div>
+      <a routerLink="/chat/{{investorData.userId}}">chat </a>
+      <a routerLink="/booking/investor/{{investorData.id}}">booking</a>
     </div>
   </div>
   <!-- Incubator Details for Pre-Seed Startups -->
@@ -81,6 +85,8 @@
       <button (click)="sendEmail(incubatorData.email)"  class="btn btn-primary btn-sm">
         Contact By Email
       </button>
+      <a routerLink="/chat/{{incubatorData.userId}}">chat </a>
+      <a routerLink="/booking/incubator/{{incubatorData.id}}">booking</a>
     </div>
   </div>
 </div>
@@ -99,6 +105,8 @@
       <button (click)="sendEmail(preSeedData.email)"  class="btn btn-primary btn-sm">
         Contact By Email
       </button>
+      <a routerLink="/chat/{{preSeedData.userId}}">chat </a>
+      <a routerLink="/booking/preSeed/{{preSeedData.id}}">booking</a>
     </div>
   </div>
 </div>

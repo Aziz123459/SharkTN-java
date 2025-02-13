@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Favorite } from '../favorite';
@@ -11,7 +11,7 @@ import { PreSeed } from '../pre-seed';
 
 @Component({
   selector: 'app-display',
-  imports: [CommonModule, HomeNavbarComponent],
+  imports: [CommonModule, HomeNavbarComponent,RouterLink],
   templateUrl: './display.component.html',
   styleUrl: './display.component.css'
 })

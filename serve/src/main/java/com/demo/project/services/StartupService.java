@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.demo.project.models.Investor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,15 @@ public class StartupService {
                 .map(this::convertEntityToDto)
                 .orElseThrow(() -> new RuntimeException("Startup not found"));
     }
+    public Startup getStartupByUserIdEntity(Long id) {
+        return startupRepo.findByUserId(id)
+                .orElseThrow(() -> new RuntimeException("Startup not found"));
+    }
+    public StartupDTO getStartupDTOByUserIdEntity(Long id) {
+        return startupRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Startup not found"));
+    }
 	
     public StartupDTO convertEntityToDto(Startup startup) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
@@ -81,7 +91,9 @@ public class StartupService {
     public Startup convertDtoToEntity(StartupDTO startupDTO) {
         return modelMapper.map(startupDTO, Startup.class);
     }
-    
+    public Startup getStartupById(Long id){
+        return startupRepo.findById(id).get();
+    }
 	
 //	// add to favorites
 //	public void addToFavorites(Long userId,Long startupId) {

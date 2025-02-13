@@ -45,6 +45,11 @@ public class InvestorService {
 	public InvestorDTO getInvestorByIdDTO(Long id){
         return convertEntityToDto(investorRepo.findById(id).get());
     }
+    public Investor getInvestorById(Long id){
+        return investorRepo.findById(id).get();
+    }
+
+
 	
 	public InvestorDTO updateInvestor(Long id, Investor investor){
         Optional<Investor> optionalInvestor = investorRepo.findById(id);
@@ -69,7 +74,15 @@ public class InvestorService {
                 .map(this::convertEntityToDto)
                 .orElseThrow(() -> new RuntimeException("Investor not found"));
     }
-	
+    public Investor getInvestorByUserIdEntity(Long id) {
+        return investorRepo.findByUserId(id)
+                .orElseThrow(() -> new RuntimeException("Investor not found"));
+    }
+    public InvestorDTO getInvestorDTOByUserIdEntity(Long id) {
+        return investorRepo.findByUserId(id)
+                .map(this::convertEntityToDto)
+                .orElseThrow(() -> new RuntimeException("Investor not found"));
+    }
     public InvestorDTO convertEntityToDto(Investor investor) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper.map(investor, InvestorDTO.class);

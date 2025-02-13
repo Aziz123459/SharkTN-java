@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Incubator } from '../incubator';
 import { PreSeed } from '../pre-seed';
 import { UploadService } from '../services/upload.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-choice-form',
@@ -60,10 +61,10 @@ export class ChoiceFormComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
 
     this.investorFormGroup = this.fb.group({
-      investorEmail: ['', [Validators.required, Validators.email]],
-      investmentAmount: ['', [Validators.required, Validators.min(1)]],
-      message: ['', Validators.maxLength(500)],
-      businessRegistrationNumber: ['', Validators.required],
+      investorEmail: ['email is required', [Validators.required, Validators.email]],
+      investmentAmount: ['investment amount is required', [Validators.required, Validators.min(1)]],
+      message: ['message is required', Validators.maxLength(500)],
+      businessRegistrationNumber: ['business Registration Number is required', Validators.required],
     });
 
     this.startupFormGroup = this.fb.group({
@@ -96,6 +97,7 @@ export class ChoiceFormComponent implements OnInit {
       this.investorData.userId = this.userId;
       this.apiService.creatInvestor(this.investorData).subscribe({
         next: (response) => {
+          console.log(response)
           console.log('Investor created successfully:', response);
           if (response.status === 0) {
             this.router.navigate(['/pending']);

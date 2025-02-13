@@ -37,5 +37,4 @@ public class MessageService {
     public List<Message> getChatHistory(Long senderId, Long receiverId) {
         return messageRepository.findBySenderAndReceiver(senderId, receiverId);
     }
-
 }
