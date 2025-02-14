@@ -1,11 +1,12 @@
 /* General Styles */
 body {
-  background-color: #f8f9fa; /* Light background for contrast */
+  /* background-color: ; Light background for contrast */
   font-family: 'Arial', sans-serif; /* Clean font */
 }
 
 .page {
   padding: 20px;
+  background-color: #f8f9fa;
 }
 
 .full-width {
@@ -22,7 +23,7 @@ body {
   border: none; /* Remove default border */
   border-radius: 10px; /* Rounded corners */
   transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
-  min-height: 300px;
+  min-height: 350px;
 }
 
 .card:hover {
@@ -76,4 +77,74 @@ p {
       flex: 0 0 100%; /* Full width on smaller screens */
       max-width: 100%; /* Full width on smaller screens */
   }
+}
+
+/* General Card Styling */
+.business-card {
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 12px; /* Slightly rounded corners */
+  background: white; /* Clean white background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.business-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Card Header Styling */
+.card-header {
+  background: #ccc9c9; /* Light gray background */
+  border-bottom: 1px solid #e0e0e0; /* Subtle border */
+  padding: 20px;
+}
+
+.profile-image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.profile-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Ensure the image fits well */
+  border-radius: 50%;
+}
+
+/* Card Body Styling */
+.card-body {
+  padding: 20px;
+  background: #f7fafc; /* Light gray background */
+
+}
+
+.card-body p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #333; /* Dark gray for readability */
+}
+
+.card-body strong {
+  color: #2c3e50; /* Dark blue-gray for emphasis */
+}
+
+/* Truncated Text Styling */
+.truncate-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #555; /* Slightly lighter text for the message */
 }

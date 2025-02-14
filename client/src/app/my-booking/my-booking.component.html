@@ -1,24 +1,24 @@
 <app-home-navbar></app-home-navbar>
-<mat-toolbar color="primary">
-    <span>My Bookings</span>
-  </mat-toolbar>
+
   
-  <div class="booking-container">
-    <div *ngIf="errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
-    </div>
-  
-    <div *ngIf="bookings.length > 0">
-      <div *ngFor="let booking of bookings" class="booking-item">
-        <h3>Booking ID: {{ booking.id }}</h3>
-        <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
-        
-        <hr />
+  <div class="center">
+    <div class="booking-container ">
+      <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
       </div>
-    </div>
-  
-    <div *ngIf="bookings.length === 0 && !errorMessage">
-      <p>No bookings found.</p>
+    
+      <div *ngIf="bookings.length > 0">
+        <div *ngFor="let booking of bookings" class="booking-item">
+          <h3>Booking ID: {{ booking.id }}</h3>
+          <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
+          
+          <hr />
+        </div>
+      </div>
+    
+      <div *ngIf="bookings.length === 0 && !errorMessage">
+        <p>No bookings found.</p>
+      </div>
     </div>
   </div>
   

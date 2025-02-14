@@ -35,16 +35,15 @@ public class UserService {
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Map<String, String>> deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Collections.singletonMap("message", "User not found."));
         }
 
         userRepository.deleteById(id);
+        System.out.println("User deleted from repository");
 
-        // Return JSON instead of plain text
         Map<String, String> response = new HashMap<>();
         response.put("message", "User deleted successfully.");
         return ResponseEntity.ok(response);
