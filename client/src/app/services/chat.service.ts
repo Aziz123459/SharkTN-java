@@ -25,28 +25,34 @@ import SockJS from 'sockjs-client';
           const socket = new SockJS('http://localhost:8080/api/chat');
           this.stompClient = new Client({
             webSocketFactory: () => socket,
-            debug: (msg) => console.log(msg),
+            debug: (msg) => console.log(msg), // Log all debug messages
             reconnectDelay: 5000,
           });
-    
+      
           this.stompClient.onConnect = (frame) => {
-            console.log('Connected to WebSocket');
-            this.stompClient?.subscribe(`/topic/messages/${userId}`, (message: StompMessage) => {
+            console.log('✅ Connected to WebSocket', frame);
+      
+            // Check the subscription
+            const subscription = this.stompClient?.subscribe(`/topic/messages/${userId}`, (message: StompMessage) => {
+              console.log('📩 Received message:', message.body);  // Log message body
               const newMessage: Message = JSON.parse(message.body);
-              console.log('Received message:', newMessage);
+              console.log('📩 Parsed message:', newMessage);  // Log parsed message
               this.messagesSubject.next(newMessage);
             });
+      
+            console.log(`📡 Subscribed to /topic/messages/${userId}`, subscription);
           };
-    
+      
           this.stompClient.onStompError = (frame) => {
-            console.error('WebSocket Error:', frame);
+            console.error('❌ WebSocket Error:', frame);
           };
-    
+      
           this.stompClient.activate();
         } catch (error) {
-          console.error('WebSocket connection error:', error);
+          console.error('❌ WebSocket connection error:', error);
         }
       }
+      
     
       sendMessageWebSocket(senderId: number, receiverId: number, content: string): void {
         if (this.stompClient && this.stompClient.connected) {

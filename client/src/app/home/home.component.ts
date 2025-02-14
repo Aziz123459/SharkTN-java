@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { PendingComponent } from '../pending/pending.component';
 import { DeniedComponent } from '../denied/denied.component';
 import { InvestorWithUser } from '../investor-with-user';
+import { Inv } from '../inv';
 
 
 @Component({
@@ -27,11 +28,12 @@ export class HomeComponent {
   type: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER'| 'ROLE_ADMIN'|'ROLE_INCUBATOR'|'ROLE_PRE_SEED'| null = null; 
   item: (Investor | Startup)[] = []; 
   start:(Startup)[]=[];
+  invest:(InvestorWithUser)[]=[];
   itemsInvestors: InvestorWithUser[]=[]
   item2:( PreSeed)[]=[];
   item3:(Incubator)[]=[]
   investorData: Investor = {};
-  filteredInvestor:Investor[]=[]
+  filteredInvestor:Inv[]=[]
   startupData: Startup = {};
   filtredStartup:Startup[]=[]
   incubatorData: Incubator = {}; 
@@ -197,6 +199,10 @@ export class HomeComponent {
     console.log(query)
     this.filtredStartup=this.start.filter(item =>
       item.startupName?.toLowerCase().includes(query) 
+      
+    )
+    this.filteredInvestor=this.invest.filter(item1=>
+      item1.user?.fullname?.toLowerCase().includes(query)
     )
 }
 

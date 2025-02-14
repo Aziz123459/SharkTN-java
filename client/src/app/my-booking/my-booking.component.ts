@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 import { Booking } from '../booking';
+import { Bookinginvestor } from '../bookinginvestor';
 
 @Component({
   selector: 'app-my-booking',
@@ -15,6 +16,7 @@ import { Booking } from '../booking';
 })
 export class MyBookingComponent implements OnInit {
   bookings: Booking[] = [];
+  bookingsInv:Bookinginvestor[]=[]
   errorMessage: string = '';
   role: string | null = localStorage.getItem('role'); // Assuming 'role' is stored in localStorage
 
@@ -40,7 +42,7 @@ export class MyBookingComponent implements OnInit {
     } else if (this.role === 'ROLE_STARTUP_FOUNDER') {
       this.apiService.getBookingsForStartup().subscribe({
         next: (data) => {
-          this.bookings = data;
+          this.bookingsInv = data;
           console.log('Startup Founder Bookings:', data);
         },
         error: (err) => {

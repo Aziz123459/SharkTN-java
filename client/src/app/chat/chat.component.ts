@@ -46,10 +46,19 @@ export class ChatComponent {
   }
 
   loadChat(): void {
-    this.messageService.getChat(this.senderId, this.receiverId).subscribe((data) => {
-      this.messages = data;
-      console.log('Chat loaded:', this.messages);
-    });
+    this.messageService.getChat(this.senderId, this.receiverId).subscribe(
+      (data) => {
+        if (Array.isArray(data)) {
+          this.messages = data;
+          console.log('Chat loaded:', this.messages);
+        } else {
+          console.error('Unexpected data format:', data);
+        }
+      },
+      (error) => {
+        console.error('Error loading chat:', error);
+      }
+    );
   }
 
   sendMessage(): void {

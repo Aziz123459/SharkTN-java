@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Bookinginvestor } from '../bookinginvestor';
 
 @Component({
   selector: 'app-booking',
@@ -14,7 +15,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookingComponent implements OnInit {
   bookings: Booking[] = [];
+  bookingsInv:Bookinginvestor[]=[]
   newBooking: Booking = {} as Booking;
+  newBookingInv:Bookinginvestor={} as Bookinginvestor
   role: 'ROLE_INVESTOR' | 'ROLE_STARTUP_FOUNDER' | 'ROLE_ADMIN' |'ROLE_INCUBATOR'|'ROLE_PRE_SEED'|undefined;
  // Assuming you have a date field in your booking model
 
@@ -36,7 +39,7 @@ export class BookingComponent implements OnInit {
       );
     } else if (this.role === 'ROLE_INVESTOR') {
       this.apiService.getBookingsForInvestor().subscribe(
-        (data) => this.bookings = data,
+        (data) => this.bookingsInv = data,
         (error) => console.error('Error fetching investor bookings', error)
       );
     } else if (this.role === 'ROLE_STARTUP_FOUNDER') {
@@ -57,8 +60,8 @@ export class BookingComponent implements OnInit {
     });
   }
   createBooking2(): void {
-    this.apiService.createBooking2(this.newBooking,Number(this.route.snapshot.paramMap.get('id'))).subscribe((newBooking) => {
-      console.log('New booking created:', newBooking);
+    this.apiService.createBooking2(this.newBookingInv,Number(this.route.snapshot.paramMap.get('id'))).subscribe((newBookingInv) => {
+      console.log('New booking created:', newBookingInv);
       this.loadBookings();  // Refresh the list after creating a new booking
     });
   }

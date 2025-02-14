@@ -29,16 +29,26 @@ public class ChatController {
 
     @MessageMapping("/sendMessage")
     public void sendMessage(MessageDTO messageDTO) {
-        // Print debug information to ensure the message content is received correctly
-        System.out.println("Received message content: " + messageDTO.getMessage());
+        try {
+            System.out.println("✅ Received message content: " + messageDTO.getMessage());
 
-        Message savedMessage = messageService.saveMessage(messageDTO);
-        String senderDestination = "/topic/messages/" + messageDTO.getSenderId();
-        String receiverDestination = "/topic/messages/" + messageDTO.getReceiverId();
+            Message savedMessage = messageService.saveMessage(messageDTO);
 
-        messagingTemplate.convertAndSend(senderDestination, savedMessage);
-        messagingTemplate.convertAndSend(receiverDestination, savedMessage);
+            String senderDestination = "/topic/messages/" + messageDTO.getSenderId();
+            String receiverDestination = "/topic/messages/" + messageDTO.getReceiverId();
+
+            System.out.println("📤 Sending message to: " + senderDestination);
+            System.out.println("📤 Sending message to: " + receiverDestination);
+
+            messagingTemplate.convertAndSend(senderDestination, savedMessage);  // Sending to sender
+            messagingTemplate.convertAndSend(receiverDestination, savedMessage);  // Sending to receiver
+        } catch (Exception e) {
+            System.err.println("Error handling message: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
+
 
 
     @PostMapping("/send/{receiverId}/{senderId}")

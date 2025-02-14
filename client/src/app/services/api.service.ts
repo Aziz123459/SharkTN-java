@@ -8,6 +8,7 @@ import { Favorite } from '../favorite';
 import { Incubator } from '../incubator';
 import { PreSeed } from '../pre-seed';
 import { Booking } from '../booking';
+import { Bookinginvestor } from '../bookinginvestor';
 
 @Injectable({
   providedIn: 'root'
@@ -275,8 +276,8 @@ deleteInvestorById(id: string | null | undefined):Observable<any> {
     return this.http.post<Booking>(`${this.baseUrl}/booking/create/investor/${id}`, booking);
   }
 
-  createBooking2(booking: Booking,id:Number): Observable<Booking> {
-    return this.http.post<Booking>(`${this.baseUrl}/booking/create/startup/${id}`, booking);
+  createBooking2(booking: Bookinginvestor,id:Number): Observable<Bookinginvestor> {
+    return this.http.post<Bookinginvestor>(`${this.baseUrl}/booking/create/startup/${id}`, booking);
   }
   createBooking3(booking: Booking,id:Number): Observable<Booking> {
     return this.http.post<Booking>(`${this.baseUrl}/booking/create/incubator/${id}`, booking);
@@ -299,8 +300,8 @@ deleteInvestorById(id: string | null | undefined):Observable<any> {
     return this.http.delete<void>(`${this.baseUrl}/booking/delete/${id}`);
   }
 
-  getBookingsForStartup(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.baseUrl}/booking/startup`);
+  getBookingsForStartup(): Observable<Bookinginvestor[]> {
+    return this.http.get<Bookinginvestor[]>(`${this.baseUrl}/booking/startup`);
   }
   
   getBookingsForInvestor(): Observable<Booking[]> {
