@@ -19,22 +19,24 @@
         </form>
       </div>
       
-      <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="create-booking-container mt-4">
-        <h2>Create New Booking</h2>
-        <form (ngSubmit)="createBooking()">
-          <div class="form-group">
-            <label for="bookingDate">Booking Date</label>
-            <input
-              type="datetime-local"
-              id="bookingDate"
-              [(ngModel)]="newBooking.bookingDate"
-              name="bookingDate"
-              class="form-control"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Create Booking</button>
-        </form>
+      <div class="vh-100 mt-5 pt-5">
+        <div *ngIf="role === 'ROLE_STARTUP_FOUNDER'" class="create-booking-container mt-5">
+          <h2>Create New Booking</h2>
+          <form (ngSubmit)="createBooking()">
+            <div class="form-group">
+              <label for="bookingDate">Booking Date</label>
+              <input
+                type="datetime-local"
+                id="bookingDate"
+                [(ngModel)]="newBooking.bookingDate"
+                name="bookingDate"
+                class="form-control"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Create Booking</button>
+          </form>
+        </div>
       </div>
 
       <div *ngIf="role === 'ROLE_PRE_SEED'" class="create-booking-container mt-4">

@@ -101,9 +101,9 @@ export class HomeComponent {
     }
     
     else if (this.type === 'ROLE_ADMIN') {
-      this.apiService.getinvestors().subscribe({
-        next: (data: Investor[]) => {
-          this.allInvestors = data; 
+      this.apiService.getinvestorswithusers().subscribe({
+        next: (data: InvestorWithUser[]) => {
+          this.itemsInvestors = data; 
           console.log('Fetched all investors:', data);
         },
         error: (err) => console.error('Error fetching all investors:', err)

@@ -15,14 +15,19 @@
 
     <!-- Admin Home Page -->
       <!-- Investors Section -->
-      <div *ngIf="type === 'ROLE_ADMIN' && allInvestors.length > 0; else noInvestors" class="row animated fadeInUp">
+      <div *ngIf="type === 'ROLE_ADMIN'" class="row animated fadeInUp">
         <h3 class="text-center mb-4">Investor Details</h3>
-        <div *ngFor="let investor of allInvestors" class="col-md-6">
-          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(investor.id)">
+        <div *ngFor="let entry of itemsInvestors" class="col-md-6">
+          <div class="card effect business-card mb-4 shadow-sm hover-effect" (click)="onPostClick(entry.id)">
+            <div class="card-header d-flex justify-content-center">
+              <div class="profile-image">
+                <img src="{{entry.user?.profile}}" alt="" class="profile-img">
+              </div>
+            </div> 
             <div class="card-body">
-              <p><strong>Email:</strong> {{ investor.investorEmail }}</p>
-              <p><strong>Investment Amount:</strong> {{ investor.investmentAmount }} $</p>
-              <p><strong>Message:</strong> {{ truncateText(investor.message ?? '', 130) }}</p>
+              <p><strong>Email:</strong> {{ entry.investorEmail }}</p>
+              <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }} $</p>
+              <p><strong>Message:</strong> {{ truncateText(entry.message ?? '', 130) }}</p>
             </div>
           </div>
         </div>
@@ -30,10 +35,10 @@
       <ng-template #noInvestors><p class="text-center"></p></ng-template>
 
       <!-- Display All Startups -->
-      <div *ngIf="allStartups.length > 0; else noStartups" class="row">
-        <h3>Startup Details</h3>
-        <div *ngFor="let startup of filtredStartup" class="col-md-6">
-          <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
+      <div *ngIf=" allStartups.length > 0; else noStartups" class="row">
+        <h3 class="text-center mb-4">Startup Details</h3>
+        <div *ngFor="let startup of allStartups" class="col-md-6">
+          <div class="card business-card effect mb-4 shadow-sm" (click)="onPostClick(startup.id)">
             <div class="card-header text-center">
               <img *ngIf="type === 'ROLE_ADMIN'" src="{{startup.startupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
             </div>
@@ -52,7 +57,7 @@
       <div *ngIf="type === 'ROLE_ADMIN' && allIncubators.length > 0" class="row animated fadeInUp">
         <h3 class="text-center mb-4">Incubators</h3>
         <div *ngFor="let incubator of allIncubators" class="col-md-6">
-          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(incubator.id)">
+          <div class="card business-card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(incubator.id)">
             <div class="card-body">
               <p><strong>Email:</strong> {{ incubator.email }}</p>
               <p><strong>Message:</strong> {{ truncateText(incubator.message ?? '', 130) }}</p>
@@ -65,7 +70,7 @@
       <div *ngIf="type === 'ROLE_ADMIN' && allPreSeeds.length > 0" class="row animated fadeInUp">
         <h3 class="text-center mb-4">Pre-Seed Startups</h3>
         <div *ngFor="let preSeed of allPreSeeds" class="col-md-6">
-          <div class="card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(preSeed.id)">
+          <div class="card business-card effect mb-4 shadow-sm hover-effect" (click)="onPostClick(preSeed.id)">
             <div class="card-body">
               <p><strong>Project Name:</strong> {{ preSeed.projectName }}</p>
               <p><strong>Email:</strong> {{ preSeed.email }}</p>
@@ -82,7 +87,7 @@
       <h1>All Startups</h1>
       <div *ngIf="item.length > 0; else noData" class="row d-flex flex-wrap">
         <div *ngFor="let entry of filtredStartup" class="col-6 mb-4">    
-          <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
+          <div class="card business-card effect shadow-sm" (click)="onPostClick(entry.id)">
             <div class="card-header">
               <img *ngIf="isStartup(entry)" [src]="entry.startupLogo" alt="Logo" 
                   height="80px" width="80px" style="border-radius: 50%;">
@@ -117,13 +122,14 @@
       <h2 class="text-center mb-5">All Investors</h2>
       <div class="row d-flex flex-wrap">
         <div *ngFor="let entry of itemsInvestors" class="col-6 mb-4">
-          <div class="card effect shadow-sm" (click)="onPostClick(entry.id)">
-            <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->
+          <div class="card business-card" (click)="onPostClick(entry.id)">
+            <div class="card-header d-flex justify-content-center">
+              <div class="profile-image">
+                <img src="{{entry.user?.profile}}" alt="" class="profile-img">
+              </div>
+            </div>            
             <div class="card-body">
               <ng-container>
-                <div class="mb-4" style="height: 100px; width: 100px; ">
-                  <img src="{{entry.user?.profile}}" alt="" style="height: 100%; width: 100%; border-radius: 50%">
-                </div>
                 <p><strong>Full name:</strong> {{ entry.user?.fullname }}</p>
                 <p><strong>Investor Email:</strong> {{ entry.investorEmail }}</p>
                 <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }} $</p>

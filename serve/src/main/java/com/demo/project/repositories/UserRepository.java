@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
  
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.project.models.Role;
@@ -15,5 +18,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
  //find by role
  List<User> findByRole(Role role);
  List<User> findAll();
+
+ @Modifying
+ @Query("DELETE FROM User u WHERE u.id = ?1")
  void deleteById(Long id);
+
 }

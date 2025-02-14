@@ -28,6 +28,7 @@ public class SecurityConfiguration {
 				.requestMatchers("/api/v1/auth/**")
 				.permitAll()
 				.requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+				.requestMatchers("/api/v1/delete/**").hasRole("ADMIN")
 				.requestMatchers("/api/v1/startup/**").permitAll()
 				.requestMatchers(HttpMethod.POST, "/api/v1/investor/new").authenticated()
 				.requestMatchers("/api/v1/startup/**").hasAnyRole("INVESTOR","STARTUP_FOUNDER", "ADMIN")
@@ -43,7 +44,7 @@ public class SecurityConfiguration {
 				.requestMatchers(HttpMethod.GET, "/api/v1/preseed/**").permitAll() // Allow GET request
 				.requestMatchers(HttpMethod.GET, "/api/v1/all/**").permitAll() // Allow GET request
 				.requestMatchers("/api/v1/any/**").permitAll()
-		.requestMatchers("/api/chat/**").permitAll()
+				.requestMatchers("/api/chat/**").permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()

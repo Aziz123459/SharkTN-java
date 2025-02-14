@@ -6,8 +6,7 @@
     
       <nav class="nav-links">
         <a mat-button routerLink="/home/{{type}}">Home</a>
-        <a mat-button routerLink="/profile/{{id}}" >Profile</a>
-        <a mat-button routerLink="/chat" >chat</a>
+        <a mat-button *ngIf="type != 'ROLE_ADMIN'" routerLink="/profile/{{id}}" >Profile</a>
          <!-- Bookings Button -->
          <a mat-button *ngIf="type === 'ROLE_STARTUP_FOUNDER'" routerLink="/booking/startup">Bookings Request</a>
          <a mat-button *ngIf="type === 'ROLE_INVESTOR'" routerLink="/booking/investor">Bookings Request</a>
