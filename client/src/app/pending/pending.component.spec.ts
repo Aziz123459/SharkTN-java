@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PendingComponent } from './pending.component';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
+import { CommonModule } from '@angular/common';
 
 describe('PendingComponent', () => {
   let component: PendingComponent;
@@ -8,7 +10,7 @@ describe('PendingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PendingComponent]
+      imports: [ PendingComponent]
     })
     .compileComponents();
 
