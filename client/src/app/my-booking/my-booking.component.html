@@ -2,6 +2,25 @@
 
   
   <div class="center">
+
+    <!-- <div class="booking-container">
+      <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+    
+      <div *ngIf="role === 'ROLE_STARTUP_FOUNDER' && bookingsInv.length > 0">
+        <div *ngFor="let booking of bookingsInv" class="booking-item">
+          <h3>Booking ID: {{ booking.investorDTO?.investorEmail}}</h3>
+          <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
+          
+          <hr />
+        </div>
+      </div>
+    
+      <div *ngIf="bookingsInv.length === 0 && !errorMessage">
+        <p>No bookings found.</p>
+      </div>
+    </div> -->
     <div class="booking-container ">
       <div *ngIf="errorMessage" class="error-message">
         <p>{{ errorMessage }}</p>
@@ -22,22 +41,5 @@
     </div>
   </div>
   
-  <div class="booking-container">
-    <div *ngIf="errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
-    </div>
   
-    <div *ngIf="role === 'ROLE_STARTUP_FOUNDER' && bookingsInv.length > 0">
-      <div *ngFor="let booking of bookingsInv" class="booking-item">
-        <h3>Booking ID: {{ booking.investorDTO?.investorEmail}}</h3>
-        <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
-        
-        <hr />
-      </div>
-    </div>
-  
-    <div *ngIf="bookingsInv.length === 0 && !errorMessage">
-      <p>No bookings found.</p>
-    </div>
-  </div>
   

@@ -2,6 +2,8 @@ package com.demo.project.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,13 +27,15 @@ public class Message {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
-	 @ManyToOne
-	 @JoinColumn(name="sender_id")
-	 private User sender;
-	 
-	 @ManyToOne
-	 @JoinColumn(name="receiver_id")
-	 private User receiver;
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+
+	private User sender;
+
+	@ManyToOne
+	@JoinColumn(name = "receiver_id")
+
+	private User receiver;
 	 
 	 private String message;
 	    @Column(updatable=false)

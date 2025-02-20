@@ -39,8 +39,6 @@ public class BookingController {
         BookingDTO newBooking = bookingService.createBooking2(booking,startup_id,req);
         return ResponseEntity.ok(newBooking);
     }
-
-
     @GetMapping("/booking/all")
     public ResponseEntity<List<Booking>> getAllBookings() {
         return ResponseEntity.ok(bookingService.getAllBookings());
@@ -52,7 +50,6 @@ public class BookingController {
         return booking.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     @GetMapping("/booking/startup")
     public ResponseEntity<List<BookingDTO>> getBookingsForStartup(HttpServletRequest req) {
         return ResponseEntity.ok(bookingService.getAllBookingsForStartup(req));
@@ -62,12 +59,9 @@ public class BookingController {
     public ResponseEntity<List<BookingDTO>> getBookingsForInvestor(HttpServletRequest req) {
         return ResponseEntity.ok(bookingService.getAllBookingsForInvestor(req));
     }
-
-
     @DeleteMapping("/booking/delete/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         bookingService.deleteBooking(id);
         return ResponseEntity.noContent().build();
     }
 }
-

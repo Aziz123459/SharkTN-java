@@ -35,7 +35,6 @@ export class MyBookingComponent implements OnInit {
           console.log('Investor Bookings:', data);
         },
         error: (err) => {
-          this.errorMessage = 'Error fetching investor bookings';
           console.error('Error fetching investor bookings:', err);
         }
       });
@@ -46,7 +45,6 @@ export class MyBookingComponent implements OnInit {
           console.log('Startup Founder Bookings:', data);
         },
         error: (err) => {
-          this.errorMessage = 'Error fetching startup bookings';
           console.error('Error fetching startup bookings:', err);
         }
       });

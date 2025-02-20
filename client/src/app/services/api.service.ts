@@ -300,10 +300,12 @@ deleteInvestorById(id: string | null | undefined):Observable<any> {
     return this.http.delete<void>(`${this.baseUrl}/booking/delete/${id}`);
   }
 
+  // Get all bookings for the startup
   getBookingsForStartup(): Observable<Bookinginvestor[]> {
     return this.http.get<Bookinginvestor[]>(`${this.baseUrl}/booking/startup`);
   }
-  
+
+  // Get all bookings for the investor
   getBookingsForInvestor(): Observable<Booking[]> {
     return this.http.get<Booking[]>(`${this.baseUrl}/booking/investor`);
   }

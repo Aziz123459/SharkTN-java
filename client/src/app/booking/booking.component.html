@@ -1,7 +1,7 @@
 <app-home-navbar></app-home-navbar>
     <!-- Navbar or Header Section -->
      
-    <div *ngIf="role === 'ROLE_INVESTOR'" class="create-booking-container mt-4">
+    <!-- <div *ngIf="role === 'ROLE_INVESTOR'" class="create-booking-container mt-4">
         <h2>Create New Booking</h2>
         <form (ngSubmit)="createBooking2()">
           <div class="form-group">
@@ -37,9 +37,9 @@
             <button type="submit" class="btn btn-primary">Create Booking</button>
           </form>
         </div>
-      </div>
+      </div> -->
 
-      <div *ngIf="role === 'ROLE_PRE_SEED'" class="create-booking-container mt-4">
+      <div *ngIf="role === 'ROLE_PRE_SEED'" class="create-booking-container ">
         <h2>Create New Booking</h2>
         <form (ngSubmit)="createBooking3()">
           <div class="form-group">
@@ -57,7 +57,7 @@
         </form>
       </div>
 
-      <div *ngIf="role === 'ROLE_INCUBATOR'" class="create-booking-container mt-4">
+      <!-- <div *ngIf="role === 'ROLE_INCUBATOR'" class="create-booking-container mt-4">
         <h2>Create New Booking</h2>
         <form (ngSubmit)="createBooking4()">
           <div class="form-group">
@@ -73,4 +73,4 @@
           </div>
           <button type="submit" class="btn btn-primary">Create Booking</button>
         </form>
-      </div>
+      </div> -->

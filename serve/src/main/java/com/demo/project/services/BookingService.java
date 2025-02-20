@@ -36,7 +36,7 @@ public class BookingService {
             booking.setInvestor(investorService.getInvestorById(investor_id));
             booking.setStartup(startup);
 
-                return convertEntityToDto(bookingRepository.save(booking));
+            return convertEntityToDto(bookingRepository.save(booking));
 
         }
         return convertEntityToDto(bookingRepository.save(booking));
@@ -106,6 +106,6 @@ public class BookingService {
         throw new RuntimeException("Authorization header is missing or invalid");
     }
     //public Investor convertDtoToEntity(InvestorDTO investorDTO) {
-        //return modelMapper.map(investorDTO, Investor.class);
+    //return modelMapper.map(investorDTO, Investor.class);
     //}
 }

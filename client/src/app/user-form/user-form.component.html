@@ -21,8 +21,8 @@
                             
                         </div>
                         <div class="form-group">
-                            <label for="profile"><i class="zmdi zmdi-lock-outline"></i></label>
-                            <input type="file" name="profile" [(ngModel)]="new.profile" id="profile" placeholder="Add your profile picture" (change)="onFileSelected($event, 0)"/>
+                            <label class="form-label" for="profile"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input class="form-control" type="file" name="profile" [(ngModel)]="new.profile" id="profile" placeholder="Add your profile picture" (change)="onFileSelected($event, 0)"/>
                             <small class="form-text text-muted">
                                 {{ selectedFile[0]?.name || 'No file selected' }}
                             </small>
